@@ -14,10 +14,12 @@ class AddFieldToUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('nrp')->after('id')->unique();
-            $table->string('major')->after('password')->default('Teknik Informatika');
-            $table->year('class_year')->after('major');
-            $table->boolean('vote_status')->after('class_year')->default(false);
+            $table->string('nrp')->after('id')->unique()->nullable();
+            $table->string('username')->after('name')->unique()->nullable();
+            $table->boolean('roles')->after('password')->default(false);
+            $table->string('major')->after('roles')->nullable();
+            $table->string('class_year')->after('major')->nullable();
+            $table->boolean('vote_status')->after('class_year')->nullable();
         });
     }
 
@@ -30,6 +32,7 @@ class AddFieldToUsersTable extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->dropColumn('nrp');
+            $table->dropColumn('username');
             $table->dropColumn('major');
             $table->dropColumn('class_year');
             $table->dropColumn('vote_status');

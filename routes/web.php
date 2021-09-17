@@ -18,22 +18,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::middleware('guest')->group(function () {
-    Route::get('/admin/login', [AdminController::class, 'login'])->name('admin.login');
-    Route::post('/admin/login', [AdminController::class, 'authenticate']);
-
-    Route::get('/admin/register', [AdminController::class, 'register'])->name('admin.register');
-    Route::post('/admin/register', [AdminController::class, 'store']);
-});
-
 Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('/dashboard', function () {
         return view('dashboard');
-    })->name('admin.dashboard');
-
-    Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
-});
-
-Route::middleware('auth')->group(function () {
-    Route::post('/admin/logout', [AdminController::class, 'logout']);
+    })->name('dashboard');
 });
