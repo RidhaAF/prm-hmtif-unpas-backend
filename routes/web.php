@@ -22,4 +22,24 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
+
+    Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
+
+    // Route::get('/admin/dashboard', function () {
+    //     return view('admin.dashboard', [
+    //         'title' => 'Dashboard',
+    //     ]);
+    // });
+
+    Route::get('/admin/candidate', function () {
+        return view('admin.candidate', [
+            'title' => 'Kandidat',
+        ]);
+    });
+
+    Route::get('/admin/voter', function () {
+        return view('admin.voter', [
+            'title' => 'Pemilih',
+        ]);
+    });
 });

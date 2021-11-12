@@ -20,6 +20,8 @@ class Candidate extends Model
         'nrp',
         'name',
         'major',
+        'vision',
+        'mission',
     ];
 
     /**

@@ -13,8 +13,7 @@ class AdminController extends Controller
     public function index()
     {
         return view('/admin/dashboard', [
-            'title' => 'Dashboard Admin',
-            'name' => Auth::user()->name,
+            'title' => 'Dashboard',
         ]);
     }
 
