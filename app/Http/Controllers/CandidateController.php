@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Candidate;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use App\Http\Controllers\Controller;
 
 class CandidateController extends Controller
@@ -90,7 +91,7 @@ class CandidateController extends Controller
     public function update(Request $request, Candidate $candidate)
     {
         $request->validate([
-            'nrp' => 'required|string|min:9|max:9|unique:candidates',
+            'nrp' => ['required', 'string', 'min:9', 'max:9', Rule::unique('candidates')->ignore($candidate->id)],
             'name' => 'required|string|max:255',
             'vision' => 'required|string',
             'mission' => 'required|string'
