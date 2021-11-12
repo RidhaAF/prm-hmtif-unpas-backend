@@ -13,7 +13,7 @@
     <div class="col text-end">
         <div class="btn-group mb-1">
             <div class="dropdown">
-                <button class="btn btn-success dropdown-toggle me-1" type="button" id="dropdownMenuButton2"
+                <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenuButton2"
                     data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="bi bi-person-fill me-3"></i>
                     <span>{{ Auth::user()->name }}</span>
