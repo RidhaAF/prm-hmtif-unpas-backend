@@ -14,15 +14,24 @@
             @method('DELETE')
             <a class="btn btn-primary" href="/admin/candidate/{{ $candidate->id }}/edit" role="button">
                 <i class="bi bi-pencil-fill"></i> Ubah</a>
-            <button class="btn btn-danger" type="submit"><i class="bi bi-trash-fill"></i> Hapus</button>
+            <button class="btn btn-danger" type="submit" onclick="return confirm('Yakin ingin menghapus data ini?');"><i
+                    class="bi bi-trash-fill"></i>
+                Hapus</button>
         </form>
     </div>
 </div>
 
 <div class="row">
     <div class="col-md-2">
-        <img src="https://media.gq.com/photos/5da0bf5eea4a24000984aa88/1:1/w_2105,h_2105,c_limit/Timothee-Chalamet-Grooming-Gods-10-13.jpg"
-            class="img-fluid" alt="Kandidat" style="border-radius: 12px;">
+        @if ($candidate->profile_photo_path)
+        <div class="ratio ratio-1x1">
+            <img src="{{ asset('storage/' . $candidate->profile_photo_path) }}"
+                class="img-fluid img-candidate-fit-rounded" alt="{{ $candidate->name }}">
+        </div>
+        @else
+        <img src="{{ asset('assets/images/profile-picture-default.png') }}" class="img-fluid img-candidate-rounded"
+            alt="{{ $candidate->name }}">
+        @endif
     </div>
     <div class="col">
         <h6 class="text-success">NRP</h6>

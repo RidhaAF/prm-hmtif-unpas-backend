@@ -5,60 +5,65 @@
 
 <div class="row">
     <div class="col-md-10">
-        <form action="{{ route('candidate.store') }}" method="POST">
+        <form action="{{ route('candidate.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="row mb-3">
                 <div class="col-md-2">
-                    <img src="https://media.gq.com/photos/5da0bf5eea4a24000984aa88/1:1/w_2105,h_2105,c_limit/Timothee-Chalamet-Grooming-Gods-10-13.jpg"
-                        class="img-fluid" alt="Kandidat" style="border-radius: 12px;">
+                    <div class="ratio ratio-1x1">
+                        <img src="{{ asset('assets/images/profile-picture-default.png') }}"
+                            class="img-fluid profile-picture-preview img-candidate-fit-rounded" alt="Kandidat">
+                    </div>
                 </div>
                 <div class="col">
                     <div class="form-group mb-3">
                         <label for="profile_photo_path" class="form-label text-success">Unggah Foto Profil</label>
-                        <input class="form-control" type="file" id="profile_photo_path">
+                        <input class="form-control @error('profile_photo_path') is-invalid @enderror" type="file"
+                            id="profile_photo_path" name="profile_photo_path">
+                        @error('profile_photo_path')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                        @enderror
                     </div>
                 </div>
             </div>
             <div class="form-group mb-3">
                 <label for="nrp" class="form-label text-success">NRP</label>
-                <input type="text" name="nrp" placeholder="Masukkan NRP" class="form-control" value="{{ old('nrp') }}">
+                <input type="text" name="nrp" placeholder="Masukkan NRP"
+                    class="form-control @error('nrp') is-invalid @enderror" value="{{ old('nrp') }}">
                 @error('nrp')
-                <div class="alert alert-danger alert-dismissible show fade mt-2">
+                <div class="invalid-feedback">
                     {{ $message }}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
                 @enderror
             </div>
             <div class="form-group mb-3">
                 <label for="name" class="form-label text-success">Nama Kandidat</label>
-                <input type="text" name="name" placeholder="Masukkan Nama Kandidat" class="form-control"
-                    value="{{ old('name') }}">
+                <input type="text" name="name" placeholder="Masukkan Nama Kandidat"
+                    class="form-control @error('name') is-invalid @enderror" value="{{ old('name') }}">
                 @error('name')
-                <div class="alert alert-danger alert-dismissible show fade mt-2">
+                <div class="invalid-feedback">
                     {{ $message }}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
                 @enderror
             </div>
             <div class="form-group mb-3">
                 <label for="vision" class="form-label text-success">Visi</label>
-                <textarea class="form-control" id="vision" name="vision" rows="3"
+                <textarea class="form-control  @error('vision') is-invalid @enderror" id="vision" name="vision" rows="3"
                     placeholder="Masukkan Visi">{{ old('vision') }}</textarea>
                 @error('vision')
-                <div class="alert alert-danger alert-dismissible show fade mt-2">
+                <div class="invalid-feedback">
                     {{ $message }}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
                 @enderror
             </div>
             <div class="form-group mb-3">
                 <label for="mission" class="form-label text-success">Misi</label>
-                <textarea class="form-control" id="mission" name="mission" rows="3"
-                    placeholder="Masukkan Misi">{{ old('mission') }}</textarea>
+                <textarea class="form-control @error('mission') is-invalid @enderror" id="mission" name="mission"
+                    rows="3" placeholder="Masukkan Misi">{{ old('mission') }}</textarea>
                 @error('mission')
-                <div class="alert alert-danger alert-dismissible show fade mt-2">
+                <div class="invalid-feedback">
                     {{ $message }}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
                 @enderror
             </div>
@@ -70,5 +75,8 @@
     </div>
 </div>
 
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script type="text/javascript">
 
+</script>
 @endsection

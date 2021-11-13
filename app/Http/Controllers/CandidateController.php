@@ -42,14 +42,19 @@ class CandidateController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
+        $validatedData = $request->validate([
             'nrp' => 'required|string|min:9|max:9|unique:candidates',
             'name' => 'required|string|max:255',
             'vision' => 'required|string',
-            'mission' => 'required|string'
+            'mission' => 'required|string',
+            'profile_photo_path' => 'image|mimes:jpg,png,jpeg,gif,svg|max:2048',
         ]);
 
-        Candidate::create($request->all());
+        if ($request->file('profile_photo_path')) {
+            $validatedData['profile_photo_path'] = $request->file('profile_photo_path')->store('candidate');
+        }
+
+        Candidate::create($validatedData);
 
         return redirect()->route('candidate.index')
             ->with('success', 'Kandidat berhasil ditambahkan.');
@@ -90,14 +95,23 @@ class CandidateController extends Controller
      */
     public function update(Request $request, Candidate $candidate)
     {
-        $request->validate([
+        $validatedData = $request->validate([
             'nrp' => ['required', 'string', 'min:9', 'max:9', Rule::unique('candidates')->ignore($candidate->id)],
             'name' => 'required|string|max:255',
             'vision' => 'required|string',
-            'mission' => 'required|string'
+            'mission' => 'required|string',
+            'profile_photo_path' => 'image|mimes:jpg,png,jpeg,gif,svg|max:2048',
         ]);
 
-        $candidate->update($request->all());
+        if ($request->file('profile_photo_path')) {
+            if ($candidate->profile_photo_path) {
+                unlink(storage_path('app/public/' . $candidate->profile_photo_path));
+            }
+
+            $validatedData['profile_photo_path'] = $request->file('profile_photo_path')->store('candidate');
+        }
+
+        $candidate->update($validatedData);
 
         return redirect()->route('candidate.index')
             ->with('success', 'Kandidat berhasil diubah.');
@@ -111,6 +125,10 @@ class CandidateController extends Controller
      */
     public function destroy(Candidate $candidate)
     {
+        if ($candidate->profile_photo_path) {
+            unlink(storage_path('app/public/' . $candidate->profile_photo_path));
+        }
+
         $candidate->delete();
 
         return redirect()->route('candidate.index')
