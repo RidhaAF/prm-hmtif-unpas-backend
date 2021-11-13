@@ -13,18 +13,15 @@
     <div class="col text-end">
         <div class="btn-group mb-1">
             <div class="dropdown">
-                <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenuButton2"
+                <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenuButton"
                     data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <i class="bi bi-person-fill me-3"></i>
-                    <span>{{ Auth::user()->name }}</span>
+                    <i class="bi bi-person-fill me-3"></i> {{ Auth::user()->name }}
                 </button>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
+                <div class="dropdown-menu shadow" aria-labelledby="dropdownMenuButton">
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
-                        <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
-                        this.closest('form').submit();" role="button" <i class="bi bi-box-arrow-right me-3"></i>
-                            <span>Logout</span>
-                        </a>
+                        <button class="dropdown-item" type="submit" onclick="event.preventDefault();
+                        this.closest('form').submit();"><i class="bi bi-box-arrow-right me-3"></i> Logout</button>
                     </form>
                 </div>
             </div>
