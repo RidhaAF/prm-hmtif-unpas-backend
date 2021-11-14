@@ -12,11 +12,12 @@
         <form action="{{ route('candidate.destroy', $candidate->id) }}" method="POST">
             @csrf
             @method('DELETE')
-            <a class="btn btn-primary" href="/admin/candidate/{{ $candidate->id }}/edit" role="button">
-                <i class="bi bi-pencil-fill"></i> Ubah</a>
+            <a class="btn btn-primary" href="{{ route('candidate.edit', $candidate->id) }}" role="button">
+                <i class="bi bi-pencil-fill"></i> Ubah
+            </a>
             <button class="btn btn-danger" type="submit" onclick="return confirm('Yakin ingin menghapus data ini?');"><i
-                    class="bi bi-trash-fill"></i>
-                Hapus</button>
+                    class="bi bi-trash-fill"></i>Hapus
+            </button>
         </form>
     </div>
 </div>
