@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\User;
-use Illuminate\Support\Str;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 
@@ -16,8 +15,6 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        User::factory()->count(10)->create();
-
         //Create Admin
         User::create([
             'name' => 'Admin',
@@ -25,7 +22,8 @@ class UserSeeder extends Seeder
             'email_verified_at' => now(),
             'password' => Hash::make('12345678'),
             'roles' => true,
-            'remember_token' => Str::random(10),
         ]);
+
+        User::factory()->count(20)->create();
     }
 }

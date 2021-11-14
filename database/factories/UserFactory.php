@@ -4,7 +4,6 @@ namespace Database\Factories;
 
 use App\Models\Team;
 use App\Models\User;
-use Illuminate\Support\Str;
 use Laravel\Jetstream\Features;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -32,9 +31,9 @@ class UserFactory extends Factory
             'email' => $this->faker->unique()->safeEmail(),
             'email_verified_at' => now(),
             'password' => Hash::make('12345678'),
+            'major' => 'Teknik Informatika',
             'class_year' => $this->faker->numberBetween(2017, 2022),
             'vote_status' => $this->faker->boolean(),
-            'remember_token' => Str::random(10),
         ];
     }
 
