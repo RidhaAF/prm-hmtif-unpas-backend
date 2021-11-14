@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Vote;
 use Laravel\Jetstream\HasProfilePhoto;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
