@@ -21,8 +21,8 @@
                         <img src="{{ asset('assets/images/profile-picture-default.png') }}"
                             class="img-fluid profile-picture-preview img-candidate-fit-rounded"
                             alt="{{ $candidate->name }}">
-                        @endif
                     </div>
+                    @endif
                 </div>
                 <div class="col">
                     <div class="form-group mb-3">

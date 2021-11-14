@@ -34,7 +34,7 @@
                         class="img-fluid img-candidate-rounded-top" alt="{{ $candidate->name }}">
                     @endif
                     <div class="card-body">
-                        <p class="card-title fw-bold">{{ Str::limit($candidate->name, 15) }}</p>
+                        <p class="card-title fw-bold">{{ Str::limit($candidate->name, 13) }}</p>
                         <p class="card-text">{{ $candidate->nrp }}</p>
                     </div>
                 </div>
