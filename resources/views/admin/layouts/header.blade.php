@@ -18,7 +18,7 @@
                     <i class="bi bi-person-fill me-3"></i> {{ Auth::user()->name }}
                 </button>
                 <div class="dropdown-menu shadow" aria-labelledby="dropdownMenuButton">
-                    <form method="POST" action="{{ route('logout') }}">
+                    <form method="POST" action="{{ route('logout') }}" class="m-0">
                         @csrf
                         <button class="dropdown-item" type="submit" onclick="event.preventDefault();
                         this.closest('form').submit();"><i class="bi bi-box-arrow-right me-3"></i> Logout</button>

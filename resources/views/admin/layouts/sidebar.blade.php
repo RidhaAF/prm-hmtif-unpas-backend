@@ -3,7 +3,7 @@
         <div class="sidebar-header mt-3">
             <div class="d-flex justify-content-between">
                 <div class="logo">
-                    <a href="/admin/dashboard">
+                    <a href="{{ route('admin.dashboard') }}">
                         <h5 class="text-success">PRM HMTIF-UNPAS</h4>
                     </a>
                 </div>
@@ -18,21 +18,21 @@
                 <li class="sidebar-title text-success">Menu</li>
 
                 <li class="sidebar-item active">
-                    <a href="/admin/dashboard" class='sidebar-link'>
+                    <a href="{{ route('admin.dashboard') }}" class='sidebar-link'>
                         <i class="bi bi-grid-fill"></i>
                         <span>Dashboard</span>
                     </a>
                 </li>
 
                 <li class="sidebar-item">
-                    <a href="/admin/candidate" class='sidebar-link'>
+                    <a href="{{ route('candidate.index') }}" class='sidebar-link'>
                         <i class="bi bi-person-fill"></i>
                         <span>Kandidat</span>
                     </a>
                 </li>
 
                 <li class="sidebar-item">
-                    <a href="/admin/voter" class='sidebar-link'>
+                    <a href="{{ route('voter.index') }}" class='sidebar-link'>
                         <i class="bi bi-people-fill"></i>
                         <span>Pemilih</span>
                     </a>
