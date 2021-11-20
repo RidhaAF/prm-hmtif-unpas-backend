@@ -1597,8 +1597,8 @@
                             labels: {
                                 placeholder: "Cari...",
                                 perPage: "{select}",
-                                noRows: "Data tidak ditemukan",
-                                info: "Menampilkan {start} s/d {end} dari {rows} data",
+                                noRows: "Entri tidak ditemukan",
+                                info: "Menampilkan {start} s/d {end} dari {rows} entri",
                             },
                             layout: {
                                 top: "{select}{search}",
@@ -1836,7 +1836,7 @@
                                 let t = "<div class='dataTable-dropdown'>";
                                 (t += e.labels.perPage),
                                     (t +=
-                                        "<label>data per halaman</label></div>");
+                                        "<label>entri per halaman</label></div>");
                                 const a = createElement("select", {
                                     class: "dataTable-selector form-select",
                                 });

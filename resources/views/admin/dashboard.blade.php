@@ -12,12 +12,12 @@
                         <div class="card-body px-3 py-4-5">
                             <div class="row">
                                 <div class="col-md-4">
-                                    <div class="stats-icon purple">
-                                        <i class="iconly-boldProfile"></i>
+                                    <div class="stats-icon bg-warning">
+                                        <i class="bi bi-person-fill fs-6"></i>
                                     </div>
                                 </div>
                                 <div class="col-md-8">
-                                    <h6 class="text-muted font-semibold">Total Kandidat</h6>
+                                    <h6 class="text-muted font-semibold fs-14px">Total Kandidat</h6>
                                     <h6 class="font-extrabold text-success mb-0">{{ $candidates->count() }}</h6>
                                 </div>
                             </div>
@@ -29,12 +29,12 @@
                         <div class="card-body px-3 py-4-5">
                             <div class="row">
                                 <div class="col-md-4">
-                                    <div class="stats-icon blue">
-                                        <i class="iconly-boldProfile"></i>
+                                    <div class="stats-icon bg-info">
+                                        <i class="bi bi-people-fill fs-6"></i>
                                     </div>
                                 </div>
                                 <div class="col-md-8">
-                                    <h6 class="text-muted font-semibold">Total Pemilih</h6>
+                                    <h6 class="text-muted font-semibold fs-14px">Total Pemilih</h6>
                                     <h6 class="font-extrabold text-success mb-0">{{ $voters->count() }}</h6>
                                 </div>
                             </div>
@@ -46,12 +46,12 @@
                         <div class="card-body px-3 py-4-5">
                             <div class="row">
                                 <div class="col-md-4">
-                                    <div class="stats-icon green">
-                                        <i class="iconly-boldAdd-User"></i>
+                                    <div class="stats-icon bg-success">
+                                        <i class="bi bi-person-check-fill fs-6"></i>
                                     </div>
                                 </div>
                                 <div class="col-md-8">
-                                    <h6 class="text-muted font-semibold">Sudah Memilih</h6>
+                                    <h6 class="text-muted font-semibold fs-14px">Sudah Memilih</h6>
                                     <h6 class="font-extrabold text-success mb-0">{{ $voted->count() }}</h6>
                                 </div>
                             </div>
@@ -63,12 +63,12 @@
                         <div class="card-body px-3 py-4-5">
                             <div class="row">
                                 <div class="col-md-4">
-                                    <div class="stats-icon red">
-                                        <i class="iconly-boldBookmark"></i>
+                                    <div class="stats-icon bg-danger">
+                                        <i class="bi bi-person-x-fill fs-6"></i>
                                     </div>
                                 </div>
                                 <div class="col-md-8">
-                                    <h6 class="text-muted font-semibold">Belum Memilih</h6>
+                                    <h6 class="text-muted font-semibold fs-14px">Belum Memilih</h6>
                                     <h6 class="font-extrabold text-success mb-0">{{ $not_voted->count() }}</h6>
                                 </div>
                             </div>
@@ -89,49 +89,31 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-6 col-lg-3 col-md-6">
+                @php
+                $year = 2019;
+                @endphp
+                @for ($i = 1; $i < 5; $i++) <div class="col-12 col-lg-3 col-md-6">
                     <div class="card">
                         <div class="card-header">
-                            <h4 class="text-success">Angkatan 2019</h4>
+                            <h4 class="text-success">Angkatan {{ $year }}</h4>
                         </div>
                         <div class="card-body">
-                            <div id="chart-visitors-profile"></div>
+                            <div id="chart-{{ $i }}"></div>
                         </div>
                     </div>
-                </div>
-                <div class="col-6 col-lg-3 col-md-6">
-                    <div class="card">
-                        <div class="card-header">
-                            <h4 class="text-success">Angkatan 2020</h4>
-                        </div>
-                        <div class="card-body">
-                            <div id="chart-europe"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-6 col-lg-3 col-md-6">
-                    <div class="card">
-                        <div class="card-header">
-                            <h4 class="text-success">Angkatan 2021</h4>
-                        </div>
-                        <div class="card-body">
-                            <div id="chart-america"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-6 col-lg-3 col-md-6">
-                    <div class="card">
-                        <div class="card-header">
-                            <h4 class="text-success">Angkatan 2022</h4>
-                        </div>
-                        <div class="card-body">
-                            <div id="chart-indonesia"></div>
-                        </div>
-                    </div>
-                </div>
             </div>
+            @php
+            $year++;
+            @endphp
+            @endfor
         </div>
-    </section>
 </div>
+</section>
+</div>
+
+@section('script')
+<script src="{{ asset('assets/vendors/apexcharts/apexcharts.js') }}"></script>
+<script src="{{ asset('assets/js/pages/dashboard.js') }}"></script>
+@endsection
 
 @endsection
