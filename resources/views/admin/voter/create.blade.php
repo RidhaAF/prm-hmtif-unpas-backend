@@ -47,9 +47,6 @@
                 </div>
                 @enderror
             </div>
-            {{-- Hidden Form for Major Field --}}
-            <input type="hidden" name="major" value="Teknik Informatika">
-            {{-- End Hidden Form --}}
             <div class="form-group mb-3">
                 <label for="class_year" class="form-label text-success">Tahun Angkatan</label>
                 <input type="number" min="2017" max="2022" step="1" name="class_year"
