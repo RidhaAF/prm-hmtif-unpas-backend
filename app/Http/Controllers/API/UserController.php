@@ -16,23 +16,21 @@ class UserController extends Controller
     public function register(Request $request)
     {
         try {
-            $request->validate([
-                'nrp' => ['required', 'string', 'max:9', 'unique:users'],
+            $validatedData = $request->validate([
+                'nrp' => ['required', 'string', 'min:9', 'max:9', 'unique:users'],
                 'name' => ['required', 'string', 'max:255'],
+                'username' => ['required', 'string', 'max:255', 'unique:users'],
                 'email' => ['required', 'string', 'email:dns', 'max:255', 'unique:users'],
-                'password' => ['required', 'string', new Password],
-                'major' => ['required', 'string', 'max:255'],
-                'class_year' => ['required', 'string', 'max:4'],
+                'password' => ['string', new Password],
+                'major' => ['string', 'max:255'],
+                'class_year' => ['required', 'integer', 'min:2017', 'max:2022'],
+                'vote_status' => ['boolean'],
             ]);
 
-            User::create([
-                'nrp' => $request->nrp,
-                'name' => $request->name,
-                'email' => $request->email,
-                'password' => Hash::make($request->password),
-                'major' => $request->major,
-                'class_year' => $request->class_year,
-            ]);
+            $validatedData['major'] = 'Teknik Informatika';
+            $validatedData['vote_status'] = false;
+
+            User::create($validatedData);
 
             $user = User::where('nrp', $request->nrp)->first();
 
@@ -42,7 +40,7 @@ class UserController extends Controller
                 'access_token' => $tokenResult,
                 'token_type' => 'Bearer',
                 'user' => $user,
-            ], 'User Registered');
+            ], 'Pemilih berhasil ditambahkan.');
         } catch (Exception $error) {
             return ResponseFormatter::error([
                 'message' => 'Something went wrong',
@@ -85,6 +83,21 @@ class UserController extends Controller
                 'error' => $error,
             ], 'Authentication Failed', 500);
         }
+    }
+
+    public function fetch(Request $request)
+    {
+        return ResponseFormatter::success($request->user(), 'Pemilih berhasil diambil');
+    }
+
+    public function updateProfile(Request $request)
+    {
+        $data = $request->all();
+
+        $user = Auth::user();
+        $user->update($data);
+
+        return ResponseFormatter::success($user, 'Profil diperbarui');
     }
 
     public function logout(Request $request)
