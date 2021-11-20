@@ -17,7 +17,14 @@
                     data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="bi bi-person-fill me-3"></i> {{ Auth::user()->name }}
                 </button>
-                <div class="dropdown-menu shadow" aria-labelledby="dropdownMenuButton">
+                <div class="dropdown-menu shadow mt-1" aria-labelledby="dropdownMenuButton">
+                    <a href="{{ route('admin.dashboard') }}" class="dropdown-item"><i class="bi bi-grid me-3"></i>
+                        Dashboard</a>
+                    <a href="{{ route('candidate.index') }}" class="dropdown-item"><i class="bi bi-person me-3"></i>
+                        Kandidat</a>
+                    <a href="{{ route('voter.index') }}" class="dropdown-item"><i class="bi bi-people me-3"></i>
+                        Pemilih</a>
+                    <hr class="dropdown-divider">
                     <form method="POST" action="{{ route('logout') }}" class="m-0">
                         @csrf
                         <button class="dropdown-item" type="submit" onclick="event.preventDefault();
