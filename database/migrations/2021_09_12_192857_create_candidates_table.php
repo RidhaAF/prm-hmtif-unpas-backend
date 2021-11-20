@@ -20,7 +20,7 @@ class CreateCandidatesTable extends Migration
             $table->string('major')->default('Teknik Informatika');
             $table->text('vision');
             $table->text('mission');
-            $table->string('profile_photo_path', 2048)->nullable();
+            $table->string('photo', 2048)->nullable();
             $table->timestamps();
         });
     }

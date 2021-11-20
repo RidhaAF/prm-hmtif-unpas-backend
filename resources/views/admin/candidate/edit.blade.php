@@ -10,9 +10,9 @@
             @method('PUT')
             <div class="row mb-3">
                 <div class="col-md-2">
-                    @if ($candidate->profile_photo_path)
+                    @if ($candidate->photo)
                     <div class="ratio ratio-1x1">
-                        <img src="{{ asset('storage/' . $candidate->profile_photo_path) }}"
+                        <img src="{{ asset('storage/' . $candidate->photo) }}"
                             class="img-fluid profile-picture-preview img-candidate-fit-rounded"
                             alt="{{ $candidate->name }}">
                     </div>
@@ -26,10 +26,10 @@
                 </div>
                 <div class="col">
                     <div class="form-group mb-3">
-                        <label for="profile_photo_path" class="form-label text-success">Unggah Foto Profil</label>
-                        <input class="form-control @error('profile_photo_path') is-invalid @enderror" type="file"
-                            id="profile_photo_path" name="profile_photo_path">
-                        @error('profile_photo_path')
+                        <label for="photo" class="form-label text-success">Unggah Foto Profil</label>
+                        <input class="form-control @error('photo') is-invalid @enderror" type="file" id="photo"
+                            name="photo">
+                        @error('photo')
                         <div class="invalid-feedback">
                             {{ $message }}
                         </div>

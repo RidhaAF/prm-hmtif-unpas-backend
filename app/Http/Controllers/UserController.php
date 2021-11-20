@@ -17,7 +17,7 @@ class UserController extends Controller
     {
         return view('admin.voter.index', [
             'title' => 'Pemilih',
-            'voters' => User::all(),
+            'voters' => User::get(),
             'i' => 1,
         ]);
     }
@@ -42,16 +42,20 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
+        $validatedData = $request->validate([
             'nrp' => 'required|string|min:9|max:9|unique:users',
             'name' => 'required|string|max:255',
             'username' => 'required|string|max:255|unique:users',
             'email' => 'required|string|email|unique:users',
             'major' => 'string|max:255',
             'class_year' => 'required|integer|min:2017|max:2022',
+            'vote_status' => 'boolean',
         ]);
 
-        User::create($request->all());
+        $validatedData['major'] = 'Teknik Informatika';
+        $validatedData['vote_status'] = false;
+
+        User::create($validatedData);
 
         return redirect()->route('voter.index')
             ->with('success', 'Pemilih berhasil ditambahkan.');
@@ -92,16 +96,15 @@ class UserController extends Controller
      */
     public function update(Request $request, User $voter)
     {
-        $request->validate([
+        $validatedData = $request->validate([
             'nrp' => ['required', 'string', 'min:9', 'max:9', Rule::unique('users')->ignore($voter->id)],
             'name' => 'required|string|max:255',
             'username' => ['required', 'string', 'max:255', Rule::unique('users')->ignore($voter->id)],
             'email' => ['required', 'string', 'email', Rule::unique('users')->ignore($voter->id)],
-            'major' => 'string|max:255',
             'class_year' => 'required|integer|min:2017|max:2022',
         ]);
 
-        $voter->update($request->all());
+        $voter->update($validatedData);
 
         return redirect()->route('voter.index')
             ->with('success', 'Pemilih berhasil diubah.');

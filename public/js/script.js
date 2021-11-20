@@ -8,7 +8,7 @@ $(function () {
 
 // Preview profile photo candidate
 $(document).ready(function (e) {
-    $("#profile_photo_path").change(function () {
+    $("#photo").change(function () {
         let reader = new FileReader();
 
         reader.onload = (e) => {

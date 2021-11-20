@@ -16,10 +16,11 @@ class AddFieldToUsersTable extends Migration
         Schema::table('users', function (Blueprint $table) {
             $table->string('nrp')->after('id')->unique()->nullable();
             $table->string('username')->after('name')->unique()->nullable();
-            $table->boolean('roles')->after('password')->default(false);
+            $table->string('roles')->after('password')->default('User');
             $table->string('major')->after('roles')->nullable();
             $table->string('class_year')->after('major')->nullable();
             $table->boolean('vote_status')->after('class_year')->nullable();
+            $table->string('photo', 2048)->after('vote_status')->nullable();
         });
     }
 
@@ -36,6 +37,7 @@ class AddFieldToUsersTable extends Migration
             $table->dropColumn('major');
             $table->dropColumn('class_year');
             $table->dropColumn('vote_status');
+            $table->dropColumn('photo');
         });
     }
 }

@@ -34,6 +34,7 @@ class User extends Authenticatable
         'major',
         'class_year',
         'vote_status',
+        'photo',
     ];
 
     /**

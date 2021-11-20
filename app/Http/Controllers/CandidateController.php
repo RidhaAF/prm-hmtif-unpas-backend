@@ -18,7 +18,7 @@ class CandidateController extends Controller
     {
         return view('admin.candidate.index', [
             'title' => 'Kandidat',
-            'candidates' => Candidate::all()
+            'candidates' => Candidate::get()
         ]);
     }
 
@@ -47,11 +47,11 @@ class CandidateController extends Controller
             'name' => 'required|string|max:255',
             'vision' => 'required|string',
             'mission' => 'required|string',
-            'profile_photo_path' => 'image|mimes:jpg,png,jpeg,gif,svg|max:2048',
+            'photo' => 'image|mimes:jpg,png,jpeg,gif,svg|max:2048',
         ]);
 
-        if ($request->file('profile_photo_path')) {
-            $validatedData['profile_photo_path'] = $request->file('profile_photo_path')->store('candidate');
+        if ($request->file('photo')) {
+            $validatedData['photo'] = $request->file('photo')->store('candidate');
         }
 
         Candidate::create($validatedData);
@@ -100,15 +100,15 @@ class CandidateController extends Controller
             'name' => 'required|string|max:255',
             'vision' => 'required|string',
             'mission' => 'required|string',
-            'profile_photo_path' => 'image|mimes:jpg,png,jpeg,gif,svg|max:2048',
+            'photo' => 'image|mimes:jpg,png,jpeg,gif,svg|max:2048',
         ]);
 
-        if ($request->file('profile_photo_path')) {
-            if ($candidate->profile_photo_path) {
-                unlink(storage_path('app/public/' . $candidate->profile_photo_path));
+        if ($request->file('photo')) {
+            if ($candidate->photo) {
+                unlink(storage_path('app/public/' . $candidate->photo));
             }
 
-            $validatedData['profile_photo_path'] = $request->file('profile_photo_path')->store('candidate');
+            $validatedData['photo'] = $request->file('photo')->store('candidate');
         }
 
         $candidate->update($validatedData);
@@ -125,8 +125,8 @@ class CandidateController extends Controller
      */
     public function destroy(Candidate $candidate)
     {
-        if ($candidate->profile_photo_path) {
-            unlink(storage_path('app/public/' . $candidate->profile_photo_path));
+        if ($candidate->photo) {
+            unlink(storage_path('app/public/' . $candidate->photo));
         }
 
         $candidate->delete();

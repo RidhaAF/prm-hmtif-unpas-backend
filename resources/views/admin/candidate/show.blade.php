@@ -24,10 +24,10 @@
 
 <div class="row">
     <div class="col-md-2">
-        @if ($candidate->profile_photo_path)
+        @if ($candidate->photo)
         <div class="ratio ratio-1x1">
-            <img src="{{ asset('storage/' . $candidate->profile_photo_path) }}"
-                class="img-fluid img-candidate-fit-rounded" alt="{{ $candidate->name }}">
+            <img src="{{ asset('storage/' . $candidate->photo) }}" class="img-fluid img-candidate-fit-rounded"
+                alt="{{ $candidate->name }}">
         </div>
         @else
         <img src="{{ asset('assets/images/profile-picture-default.png') }}" class="img-fluid img-candidate-rounded"

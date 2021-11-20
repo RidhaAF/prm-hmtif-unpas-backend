@@ -16,10 +16,10 @@
                 </div>
                 <div class="col">
                     <div class="form-group mb-3">
-                        <label for="profile_photo_path" class="form-label text-success">Unggah Foto Profil</label>
-                        <input class="form-control @error('profile_photo_path') is-invalid @enderror" type="file"
-                            id="profile_photo_path" name="profile_photo_path">
-                        @error('profile_photo_path')
+                        <label for="photo" class="form-label text-success">Unggah Foto Profil</label>
+                        <input class="form-control @error('photo') is-invalid @enderror" type="file" id="photo"
+                            name="photo">
+                        @error('photo')
                         <div class="invalid-feedback">
                             {{ $message }}
                         </div>

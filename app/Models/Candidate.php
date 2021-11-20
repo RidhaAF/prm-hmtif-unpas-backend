@@ -23,7 +23,7 @@ class Candidate extends Model
         'major',
         'vision',
         'mission',
-        'profile_photo_path',
+        'photo',
     ];
 
     /**

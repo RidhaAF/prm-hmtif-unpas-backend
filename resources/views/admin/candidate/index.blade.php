@@ -24,10 +24,10 @@
         <a href="{{ route('candidate.show', $candidate->id) }}" class="link-success">
             <div class="card">
                 <div class="card-content">
-                    @if ($candidate->profile_photo_path)
+                    @if ($candidate->photo)
                     <div class="ratio ratio-1x1">
-                        <img src="{{ asset('storage/' . $candidate->profile_photo_path) }}"
-                            class="img-fluid img-candidate-fit" alt="{{ $candidate->name }}">
+                        <img src="{{ asset('storage/' . $candidate->photo) }}" class="img-fluid img-candidate-fit"
+                            alt="{{ $candidate->name }}">
                     </div>
                     @else
                     <img src="{{ asset('assets/images/profile-picture-default.png') }}"
