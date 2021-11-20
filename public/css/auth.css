@@ -4,7 +4,8 @@ body {
 
 #auth #auth-right {
     background: url(/assets/images/bg/4853433.jpg),
-        linear-gradient(45deg, #198754, #44af7d);
+        linear-gradient(45deg, #074628, #44af7d);
+    background-size: cover;
 }
 
 #auth #auth-left {
