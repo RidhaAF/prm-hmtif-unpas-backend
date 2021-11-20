@@ -18,10 +18,11 @@ class UserSeeder extends Seeder
         //Create Admin
         User::create([
             'name' => 'Admin',
+            'username' => 'admin',
             'email' => 'admin@gmail.com',
             'email_verified_at' => now(),
             'password' => Hash::make('12345678'),
-            'roles' => true,
+            'roles' => 'Admin',
         ]);
 
         User::factory()->count(20)->create();
