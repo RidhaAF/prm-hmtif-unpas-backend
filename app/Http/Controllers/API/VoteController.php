@@ -19,8 +19,10 @@ class VoteController extends Controller
      */
     public function index()
     {
-        $data = Vote::latest()->get();
-        return response()->json([VoteResource::collection($data), 'Votes fetched.']);
+        $data = Vote::get();
+        return response()->json([
+            VoteResource::collection($data), 'Votes fetched.'
+        ]);
     }
 
     /**
@@ -49,7 +51,9 @@ class VoteController extends Controller
             'vote_status' => true,
         ]);
 
-        return response()->json(['Vote created successfully.', new VoteResource($vote, $user)]);
+        return response()->json([
+            'Vote created successfully.', new VoteResource($vote, $user)
+        ]);
     }
 
     /**
@@ -64,7 +68,9 @@ class VoteController extends Controller
         if (is_null($vote)) {
             return response()->json('Data not found', 404);
         }
-        return response()->json([new VoteResource($vote)]);
+        return response()->json(
+            [VoteResource::collection($vote)]
+        );
     }
 
     /**
@@ -89,7 +95,9 @@ class VoteController extends Controller
         $vote->candidate_id = $request->candidate_id;
         $vote->save();
 
-        return response()->json(['Vote updated successfully.', new VoteResource($vote)]);
+        return response()->json([
+            'Vote updated successfully.', new VoteResource($vote)
+        ]);
     }
 
     /**
