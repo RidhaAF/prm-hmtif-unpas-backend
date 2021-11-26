@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\API\CandidateController;
 use App\Http\Controllers\API\UserController;
 use App\Http\Controllers\API\VoteController;
 
@@ -18,10 +19,11 @@ use App\Http\Controllers\API\VoteController;
 Route::post('register', [UserController::class, 'register']);
 Route::post('login', [UserController::class, 'login']);
 
-Route::middleware(['auth:sanctum', 'verified'])->group(function () {
+Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('voter', [UserController::class, 'fetch']);
     Route::post('voter', [UserController::class, 'updateProfile']);
     Route::post('logout', [UserController::class, 'logout']);
 
+    Route::resource('candidate', CandidateController::class);
     Route::resource('vote', VoteController::class);
 });
