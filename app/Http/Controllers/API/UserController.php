@@ -6,7 +6,6 @@ use Exception;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Helpers\ResponseFormatter;
-use Laravel\Fortify\Rules\Password;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -17,18 +16,22 @@ class UserController extends Controller
     {
         try {
             $validatedData = $request->validate([
-                'nrp' => ['required', 'string', 'min:9', 'max:9', 'unique:users'],
-                'name' => ['required', 'string', 'max:255'],
-                'username' => ['required', 'string', 'max:255', 'unique:users'],
-                'email' => ['required', 'string', 'email:dns', 'max:255', 'unique:users'],
-                'password' => ['string', new Password],
-                'major' => ['string', 'max:255'],
-                'class_year' => ['required', 'integer', 'min:2017', 'max:2022'],
-                'vote_status' => ['boolean'],
+                'nrp' => 'required|string|min:9|max:9|unique:users',
+                'name' => 'required|string|max:255',
+                'username' => 'required|string|max:255|unique:users',
+                'email' => 'required|string|email|unique:users',
+                'major' => 'string|max:255',
+                'class_year' => 'required|integer|min:2017|max:2022',
+                'vote_status' => 'boolean',
+                'photo' => 'image|mimes:jpg,png,jpeg,gif,svg|max:2048',
             ]);
 
             $validatedData['major'] = 'Teknik Informatika';
             $validatedData['vote_status'] = false;
+
+            if ($request->file('photo')) {
+                $validatedData['photo'] = $request->file('photo')->store('user');
+            }
 
             User::create($validatedData);
 
@@ -95,6 +98,15 @@ class UserController extends Controller
         $data = $request->all();
 
         $user = Auth::user();
+
+        if ($request->file('photo')) {
+            if ($user->photo) {
+                unlink(storage_path('app/public/' . $user->photo));
+            }
+
+            $data['photo'] = $request->file('photo')->store('user');
+        }
+
         $user->update($data);
 
         return ResponseFormatter::success($user, 'Profil diperbarui');

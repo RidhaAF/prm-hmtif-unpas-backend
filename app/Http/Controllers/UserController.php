@@ -50,10 +50,15 @@ class UserController extends Controller
             'major' => 'string|max:255',
             'class_year' => 'required|integer|min:2017|max:2022',
             'vote_status' => 'boolean',
+            'photo' => 'image|mimes:jpg,png,jpeg,gif,svg|max:2048',
         ]);
 
         $validatedData['major'] = 'Teknik Informatika';
         $validatedData['vote_status'] = false;
+
+        if ($request->file('photo')) {
+            $validatedData['photo'] = $request->file('photo')->store('user');
+        }
 
         User::create($validatedData);
 
@@ -102,7 +107,16 @@ class UserController extends Controller
             'username' => ['required', 'string', 'max:255', Rule::unique('users')->ignore($voter->id)],
             'email' => ['required', 'string', 'email', Rule::unique('users')->ignore($voter->id)],
             'class_year' => 'required|integer|min:2017|max:2022',
+            'photo' => 'image|mimes:jpg,png,jpeg,gif,svg|max:2048',
         ]);
+
+        if ($request->file('photo')) {
+            if ($voter->photo) {
+                unlink(storage_path('app/public/' . $voter->photo));
+            }
+
+            $validatedData['photo'] = $request->file('photo')->store('user');
+        }
 
         $voter->update($validatedData);
 
