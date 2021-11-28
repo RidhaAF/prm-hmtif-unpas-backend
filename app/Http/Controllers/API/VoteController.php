@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers\API;
 
+use Exception;
 use App\Models\User;
 use App\Models\Vote;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
+use App\Helpers\ResponseFormatter;
 use App\Http\Controllers\Controller;
-use App\Http\Resources\VoteResource;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Validator;
 
 class VoteController extends Controller
 {
@@ -20,9 +21,8 @@ class VoteController extends Controller
     public function index()
     {
         $data = Vote::get();
-        return response()->json([
-            VoteResource::collection($data), 'Votes fetched.'
-        ]);
+
+        return ResponseFormatter::success($data, 'Votes fetched!');
     }
 
     /**
@@ -33,27 +33,20 @@ class VoteController extends Controller
      */
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all(), [
+        $validatedData = $request->validate([
             'user_id' => 'unique:votes',
             'candidate_id' => 'required'
         ]);
 
-        if ($validator->fails()) {
-            return response()->json($validator->errors());
-        }
-
-        $vote = Vote::create([
-            'user_id' => Auth::user()->id,
-            'candidate_id' => $request->candidate_id
-        ]);
+        $validatedData['user_id'] = Auth::user()->id;
 
         $user = User::where('id', Auth::user()->id)->update([
             'vote_status' => true,
         ]);
 
-        return response()->json([
-            'Vote created successfully.', new VoteResource($vote, $user)
-        ]);
+        $vote = Vote::create($validatedData, $user);
+
+        return ResponseFormatter::success($vote, 'Vote created successfully!');
     }
 
     /**
@@ -64,13 +57,14 @@ class VoteController extends Controller
      */
     public function show(Vote $vote)
     {
-        $vote = Vote::find($vote);
-        if (is_null($vote)) {
-            return response()->json('Data not found', 404);
+        try {
+            return ResponseFormatter::success($vote, 'Detail vote showed!', compact('vote'));
+        } catch (Exception $error) {
+            return ResponseFormatter::error([
+                'message' => 'Data not found!',
+                'error' => $error,
+            ], 'Detail vote not found!', 404);
         }
-        return response()->json(
-            [VoteResource::collection($vote)]
-        );
     }
 
     /**
@@ -82,22 +76,14 @@ class VoteController extends Controller
      */
     public function update(Request $request, Vote $vote)
     {
-        $validator = Validator::make($request->all(), [
-            'user_id' => 'required',
+        $validatedData = $request->validate([
+            'user_id' => [Rule::unique('votes')->ignore(Auth::user()->id)],
             'candidate_id' => 'required'
         ]);
 
-        if ($validator->fails()) {
-            return response()->json($validator->errors());
-        }
+        $vote->update($validatedData);
 
-        $vote->user_id = $request->user_id;
-        $vote->candidate_id = $request->candidate_id;
-        $vote->save();
-
-        return response()->json([
-            'Vote updated successfully.', new VoteResource($vote)
-        ]);
+        return ResponseFormatter::success($vote, 'Vote updated successfully!');
     }
 
     /**
@@ -108,8 +94,12 @@ class VoteController extends Controller
      */
     public function destroy(Vote $vote)
     {
-        $vote->delete();
+        $user = User::where('id', Auth::user()->id)->update([
+            'vote_status' => false,
+        ]);
 
-        return response()->json('Vote deleted successfully');
+        $vote->delete($user);
+
+        return ResponseFormatter::success($vote, 'Vote deleted successfully!');
     }
 }

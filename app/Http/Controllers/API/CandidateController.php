@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers\API;
 
+use Exception;
 use App\Models\Candidate;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use App\Helpers\ResponseFormatter;
 use App\Http\Controllers\Controller;
-use App\Http\Resources\CandidateResource;
 
 class CandidateController extends Controller
 {
@@ -18,9 +19,8 @@ class CandidateController extends Controller
     public function index()
     {
         $data = Candidate::get();
-        return response()->json([
-            CandidateResource::collection($data), 'Candidates fetched.'
-        ]);
+
+        return ResponseFormatter::success($data, 'Candidates fetched!');
     }
 
     /**
@@ -45,9 +45,7 @@ class CandidateController extends Controller
 
         $candidate = Candidate::create($validatedData);
 
-        return response()->json([
-            'Candidate created successfully.', new CandidateResource($candidate)
-        ]);
+        return ResponseFormatter::success($candidate, 'Candidate created successfully!');
     }
 
     /**
@@ -58,13 +56,14 @@ class CandidateController extends Controller
      */
     public function show(Candidate $candidate)
     {
-        $candidate = Candidate::find($candidate);
-        if (is_null($candidate)) {
-            return response()->json('Data not found', 404);
+        try {
+            return ResponseFormatter::success($candidate, 'Detail candidate showed!', compact('candidate'));
+        } catch (Exception $error) {
+            return ResponseFormatter::error([
+                'message' => 'Data not found!',
+                'error' => $error,
+            ], 'Detail candidate not found!', 404);
         }
-        return response()->json([
-            CandidateResource::collection($candidate)
-        ]);
     }
 
     /**
@@ -94,9 +93,7 @@ class CandidateController extends Controller
 
         $candidate->update($validatedData);
 
-        return response()->json([
-            'Candidate updated successfully.', new CandidateResource($candidate)
-        ]);
+        return ResponseFormatter::success($candidate, 'Candidate updated successfully!');
     }
 
     /**
@@ -109,6 +106,6 @@ class CandidateController extends Controller
     {
         $candidate->delete();
 
-        return response()->json('Candidate deleted successfully');
+        return ResponseFormatter::success($candidate, 'Candidate deleted successfully!');
     }
 }
