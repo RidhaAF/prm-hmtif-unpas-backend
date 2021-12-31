@@ -16,7 +16,7 @@
         <div class="sidebar-menu">
             <ul class="menu">
                 <li class="sidebar-title text-success">Menu</li>
-                <li class="sidebar-item active">
+                <li class="sidebar-item">
                     <a href="{{ route('admin.dashboard') }}" class='sidebar-link'>
                         <i class="bi bi-grid-fill"></i>
                         <span>Dashboard</span>

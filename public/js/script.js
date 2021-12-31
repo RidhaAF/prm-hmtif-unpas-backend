@@ -1,9 +1,20 @@
 // Move active class to the current page
-$(function () {
-    $(".sidebar-item").on("click", function (e) {
-        $(".sidebar-item").removeClass("active");
-        $(this).addClass("active");
-    });
+$(document).ready(function () {
+    var url = window.location;
+    // Will only work if string in href matches with location
+    $('.sidebar-item a[href="' + url + '"]')
+        .parent()
+        .addClass("active");
+
+    // Will also work for relative and absolute hrefs
+    $(".sidebar-item a")
+        .filter(function () {
+            return this.href == url;
+        })
+        .parent()
+        .addClass("active")
+        .parent()
+        .addClass("active");
 });
 
 // Preview profile photo candidate
