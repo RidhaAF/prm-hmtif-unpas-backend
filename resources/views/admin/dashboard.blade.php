@@ -83,32 +83,75 @@
                             <h4 class="text-success">Grafik Hasil Perhitungan Suara</h4>
                         </div>
                         <div class="card-body">
-                            <div id="chart-profile-visit"></div>
+                            {!! $chartResult->container() !!}
+
+                            <script src="{{ $chartResult->cdn() }}"></script>
+
+                            {{ $chartResult->script() }}
                         </div>
                     </div>
                 </div>
             </div>
             <div class="row">
-                @php
-                $year = 2019;
-                @endphp
-                @for ($i = 1; $i < 5; $i++) <div class="col-12 col-lg-3 col-md-6">
+                <div class="col-12 col-lg-3 col-md-6">
                     <div class="card">
                         <div class="card-header">
-                            <h4 class="text-success">Angkatan {{ $year }}</h4>
+                            <h4 class="text-success">Angkatan 2019</h4>
                         </div>
                         <div class="card-body">
-                            <div id="chart-{{ $i }}"></div>
+                            {!! $chart2019->container() !!}
+
+                            <script src="{{ $chart2019->cdn() }}"></script>
+
+                            {{ $chart2019->script() }}
                         </div>
                     </div>
+                </div>
+                <div class="col-12 col-lg-3 col-md-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="text-success">Angkatan 2020</h4>
+                        </div>
+                        <div class="card-body">
+                            {!! $chart2020->container() !!}
+
+                            <script src="{{ $chart2020->cdn() }}"></script>
+
+                            {{ $chart2020->script() }}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-3 col-md-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="text-success">Angkatan 2021</h4>
+                        </div>
+                        <div class="card-body">
+                            {!! $chart2021->container() !!}
+
+                            <script src="{{ $chart2021->cdn() }}"></script>
+
+                            {{ $chart2021->script() }}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-3 col-md-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="text-success">Angkatan 2022</h4>
+                        </div>
+                        <div class="card-body">
+                            {!! $chart2022->container() !!}
+
+                            <script src="{{ $chart2022->cdn() }}"></script>
+
+                            {{ $chart2022->script() }}
+                        </div>
+                    </div>
+                </div>
             </div>
-            @php
-            $year++;
-            @endphp
-            @endfor
         </div>
-</div>
-</section>
+    </section>
 </div>
 
 @section('script')
