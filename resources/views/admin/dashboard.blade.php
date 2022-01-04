@@ -93,7 +93,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-12 col-lg-3 col-md-6">
+                <div class="col-12 col-xl-6 col-md-6">
                     <div class="card">
                         <div class="card-header">
                             <h4 class="text-success">Angkatan 2019</h4>
@@ -107,7 +107,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-12 col-lg-3 col-md-6">
+                <div class="col-12 col-xl-6 col-md-6">
                     <div class="card">
                         <div class="card-header">
                             <h4 class="text-success">Angkatan 2020</h4>
@@ -121,7 +121,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-12 col-lg-3 col-md-6">
+                <div class="col-12 col-xl-6 col-md-6">
                     <div class="card">
                         <div class="card-header">
                             <h4 class="text-success">Angkatan 2021</h4>
@@ -135,7 +135,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-12 col-lg-3 col-md-6">
+                <div class="col-12 col-xl-6 col-md-6">
                     <div class="card">
                         <div class="card-header">
                             <h4 class="text-success">Angkatan 2022</h4>
@@ -155,7 +155,6 @@
 </div>
 
 @section('script')
-<script src="{{ asset('assets/vendors/apexcharts/apexcharts.js') }}"></script>
 <script src="{{ asset('assets/js/pages/dashboard.js') }}"></script>
 @endsection
 
