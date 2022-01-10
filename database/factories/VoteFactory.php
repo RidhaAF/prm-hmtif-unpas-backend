@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Candidate;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class VoteFactory extends Factory
@@ -15,7 +16,7 @@ class VoteFactory extends Factory
     public function definition()
     {
         return [
-            'user_id' => $this->faker->unique()->numberBetween(2, 21),
+            'user_id' => User::all()->unique()->random()->id,
             'candidate_id' => Candidate::all()->random()->id,
         ];
     }

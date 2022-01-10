@@ -35,7 +35,7 @@ class Candidate extends Model
         'profile_photo_url',
     ];
 
-    public function votes()
+    public function vote()
     {
         return $this->hasMany(Vote::class, 'candidate_id', 'id');
     }

@@ -33,7 +33,7 @@ class UserFactory extends Factory
             'password' => Hash::make('12345678'),
             'major' => 'Teknik Informatika',
             'class_year' => $this->faker->numberBetween(2019, 2022),
-            'vote_status' => $this->faker->boolean(),
+            'vote_status' => $this->faker->boolean(80),
         ];
     }
 

@@ -67,7 +67,7 @@ class User extends Authenticatable
         'profile_photo_url',
     ];
 
-    public function votes()
+    public function vote()
     {
         return $this->hasOne(Vote::class, 'user_id', 'id');
     }

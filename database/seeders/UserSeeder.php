@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\User;
+use App\Models\Vote;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 
@@ -25,6 +26,8 @@ class UserSeeder extends Seeder
             'roles' => 'Admin',
         ]);
 
-        User::factory()->count(20)->create();
+        User::factory(100)->create()->where('vote_status', true)->each(function ($user) {
+            $user->vote()->save(Vote::factory()->make());
+        });
     }
 }
