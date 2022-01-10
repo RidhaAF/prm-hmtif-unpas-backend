@@ -15,7 +15,8 @@
             <div class="dropdown">
                 <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenuButton"
                     data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <i class="bi bi-person-fill me-3"></i> {{ Auth::user()->name }}
+                    <img src="{{ Auth::user()->profile_photo_url }}" class="img-fluid rounded-circle me-2" width="25"
+                        alt="{{ Auth::user()->name }}"> {{ Auth::user()->name }}
                 </button>
                 <div class="dropdown-menu shadow mt-1" aria-labelledby="dropdownMenuButton">
                     <a href="{{ route('admin.dashboard') }}" class="dropdown-item"><i class="bi bi-grid me-3"></i>
