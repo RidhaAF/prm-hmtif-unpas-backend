@@ -43,12 +43,12 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'nrp' => 'required|string|min:9|max:9|unique:users',
+            'nrp' => 'required|string|digits:9|unique:users',
             'name' => 'required|string|max:255',
             'username' => 'required|string|max:255|unique:users',
             'email' => 'required|string|email|unique:users',
             'major' => 'string|max:255',
-            'class_year' => 'required|integer|min:2017|max:2022',
+            'class_year' => 'required|integer|min:2018|max:2021',
             'vote_status' => 'boolean',
             'photo' => 'image|mimes:jpg,png,jpeg,gif,svg|max:2048',
         ]);
@@ -102,11 +102,11 @@ class UserController extends Controller
     public function update(Request $request, User $voter)
     {
         $validatedData = $request->validate([
-            'nrp' => ['required', 'string', 'min:9', 'max:9', Rule::unique('users')->ignore($voter->id)],
+            'nrp' => ['required', 'string', 'digits:9', Rule::unique('users')->ignore($voter->id)],
             'name' => 'required|string|max:255',
             'username' => ['required', 'string', 'max:255', Rule::unique('users')->ignore($voter->id)],
             'email' => ['required', 'string', 'email', Rule::unique('users')->ignore($voter->id)],
-            'class_year' => 'required|integer|min:2017|max:2022',
+            'class_year' => 'required|integer|min:2018|max:2021',
             'photo' => 'image|mimes:jpg,png,jpeg,gif,svg|max:2048',
         ]);
 
