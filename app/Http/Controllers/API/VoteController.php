@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use Exception;
 use App\Models\User;
 use App\Models\Vote;
+use App\Models\Candidate;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use App\Helpers\ResponseFormatter;
@@ -20,7 +21,16 @@ class VoteController extends Controller
      */
     public function index()
     {
-        $data = Vote::get();
+        $candidates = Candidate::get();
+
+        foreach ($candidates as $candidate) {
+            $voteResult[] = Vote::where('candidate_id', $candidate->id)->count();
+        }
+
+        $data = [
+            'voteResult' => $voteResult,
+            'votes' => Vote::get(),
+        ];
 
         return ResponseFormatter::success($data, 'Votes fetched!');
     }
