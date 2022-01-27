@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Vote;
 use App\Models\Candidate;
-use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use ArielMejiaDev\LarapexCharts\LarapexChart;
 
@@ -20,53 +19,42 @@ class DashboardController extends Controller
     {
         $candidates = Candidate::get();
         $candidateNames = $candidates->pluck('name')->toArray();
+        $users = User::join('votes', 'users.id', '=', 'votes.user_id')->get();
 
-        $users = User::join('votes', 'users.id', '=', 'votes.user_id');
+        foreach ($candidates as $candidate) {
+            $voteResult[] = Vote::where('candidate_id', $candidate->id)->count();
+            $chartResult = (new LarapexChart)->pieChart()
+                ->addData($voteResult)
+                ->setLabels($candidateNames);
+        }
 
-        $chartResult = (new LarapexChart)->pieChart()
-            ->addData([
-                Vote::where('candidate_id', 1)->count(),
-                Vote::where('candidate_id', 2)->count(),
-                Vote::where('candidate_id', 3)->count(),
-                Vote::where('candidate_id', 4)->count(),
-            ])
-            ->setLabels($candidateNames);
+        foreach ($candidates as $candidate) {
+            $voteResult2018[] = $users->where('class_year', 2018)->where('candidate_id', $candidate->id)->count();
+            $chart2018 = (new LarapexChart)->donutChart()
+                ->addData($voteResult2018)
+                ->setLabels($candidateNames);
+        }
 
-        $chart2019 = (new LarapexChart)->donutChart()
-            ->addData([
-                Vote::where('candidate_id', 1)->count(),
-                Vote::where('candidate_id', 2)->count(),
-                Vote::where('candidate_id', 3)->count(),
-                Vote::where('candidate_id', 4)->count(),
-            ])
-            ->setLabels($candidateNames);
+        foreach ($candidates as $candidate) {
+            $voteResult2019[] = $users->where('class_year', 2019)->where('candidate_id', $candidate->id)->count();
+            $chart2019 = (new LarapexChart)->donutChart()
+                ->addData($voteResult2019)
+                ->setLabels($candidateNames);
+        }
 
-        $chart2020 = (new LarapexChart)->donutChart()
-            ->addData([
-                Vote::where('candidate_id', 1)->count(),
-                Vote::where('candidate_id', 2)->count(),
-                Vote::where('candidate_id', 3)->count(),
-                Vote::where('candidate_id', 4)->count(),
-            ])
-            ->setLabels($candidateNames);
+        foreach ($candidates as $candidate) {
+            $voteResult2020[] = $users->where('class_year', 2020)->where('candidate_id', $candidate->id)->count();
+            $chart2020 = (new LarapexChart)->donutChart()
+                ->addData($voteResult2020)
+                ->setLabels($candidateNames);
+        }
 
-        $chart2021 = (new LarapexChart)->donutChart()
-            ->addData([
-                Vote::where('candidate_id', 1)->count(),
-                Vote::where('candidate_id', 2)->count(),
-                Vote::where('candidate_id', 3)->count(),
-                Vote::where('candidate_id', 4)->count(),
-            ])
-            ->setLabels($candidateNames);
-
-        $chart2022 = (new LarapexChart)->donutChart()
-            ->addData([
-                Vote::where('candidate_id', 1)->count(),
-                Vote::where('candidate_id', 2)->count(),
-                Vote::where('candidate_id', 3)->count(),
-                Vote::where('candidate_id', 4)->count(),
-            ])
-            ->setLabels($candidateNames);
+        foreach ($candidates as $candidate) {
+            $voteResult2021[] = $users->where('class_year', 2021)->where('candidate_id', $candidate->id)->count();
+            $chart2021 = (new LarapexChart)->donutChart()
+                ->addData($voteResult2021)
+                ->setLabels($candidateNames);
+        }
 
         $data = [
             'title' => 'Dashboard',
@@ -76,6 +64,6 @@ class DashboardController extends Controller
             'not_voted' => User::where('vote_status', 0)->get(),
         ];
 
-        return view('admin.dashboard', $data, compact('chartResult', 'chart2019', 'chart2020', 'chart2021', 'chart2022'));
+        return view('admin.dashboard', $data, compact('chartResult', 'chart2019', 'chart2020', 'chart2021', 'chart2018'));
     }
 }
