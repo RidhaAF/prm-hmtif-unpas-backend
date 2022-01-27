@@ -7,9 +7,9 @@
 
 @section('content')
 
-@if(session()->has('success'))
+@if(session('success'))
 <div class="alert alert-success alert-dismissible show fade">
-    {{ session()->get('success') }}
+    {{ session('success') }}
     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 </div>
 @endif
@@ -21,7 +21,7 @@
 
 <div class="page-heading mt-3">
     <section class="section">
-        <div class="card">
+        <div class="card shadow-sm">
             <div class="card-body p-3">
                 @if ($voters->count() == 0)
                 <h3 class="text-success text-center">Belum ada data pemilih</h3>
@@ -29,7 +29,7 @@
                 <div class="table-responsive">
                     <table class="table table-striped" id="table1">
                         <thead>
-                            <tr class="text-success" style="font-size: 14px">
+                            <tr class="text-success fs-14px">
                                 <th>No.</th>
                                 <th>NRP</th>
                                 <th>Nama</th>

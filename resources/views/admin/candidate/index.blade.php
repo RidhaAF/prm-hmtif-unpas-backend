@@ -3,9 +3,9 @@
 
 @section('content')
 
-@if(session()->has('success'))
+@if(session('success'))
 <div class="alert alert-success alert-dismissible show fade">
-    {{ session()->get('success') }}
+    {{ session('success') }}
     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 </div>
 @endif
@@ -20,9 +20,9 @@
     <h3 class="text-success text-center">Belum ada data kandidat</h3>
     @else
     @foreach ($candidates as $candidate)
-    <div class="col-xl-3 col-md-6 col-sm-12">
-        <a href="{{ route('candidate.show', $candidate->id) }}" class="link-success">
-            <div class="card">
+    <div class="col-md-3 col-sm-6">
+        <a href="{{ route('candidate.show', $candidate->id) }}" class="text-success">
+            <div class="card shadow-sm hover-shadow">
                 <div class="card-content">
                     @if ($candidate->photo)
                     <div class="ratio ratio-1x1">
@@ -34,8 +34,8 @@
                         class="img-fluid img-candidate-rounded-top" alt="{{ $candidate->name }}">
                     @endif
                     <div class="card-body">
-                        <p class="card-title fw-bold">{{ Str::limit($candidate->name, 13) }}</p>
-                        <p class="card-text">{{ $candidate->nrp }}</p>
+                        <p class="fw-bold text-truncate mb-0">{{ $candidate->name }}</p>
+                        <p class="text-muted fs-14px mb-0">{{ $candidate->nrp }}</p>
                     </div>
                 </div>
             </div>
