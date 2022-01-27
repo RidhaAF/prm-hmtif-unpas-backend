@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Artisan;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CandidateController;
 use App\Http\Controllers\DashboardController;
@@ -18,6 +19,10 @@ use App\Http\Controllers\DashboardController;
 
 Route::get('/', function () {
     return view('auth.login');
+});
+
+Route::get('/linkstorage', function () {
+    Artisan::call('storage:link'); // this will do the command line job
 });
 
 Route::middleware(['auth:sanctum', 'verified'])->group(function () {
