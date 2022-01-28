@@ -21,15 +21,10 @@ class VoteController extends Controller
      */
     public function index()
     {
-        $candidates = Candidate::get();
-
-        foreach ($candidates as $candidate) {
-            $voteResult[] = Vote::where('candidate_id', $candidate->id)->count();
-        }
+        $votes = Vote::get();
 
         $data = [
-            'voteResult' => $voteResult,
-            'votes' => Vote::get(),
+            'votes' => $votes,
         ];
 
         return ResponseFormatter::success($data, 'Votes fetched!');
@@ -111,5 +106,33 @@ class VoteController extends Controller
         $vote->delete($user);
 
         return ResponseFormatter::success($vote, 'Vote deleted successfully!');
+    }
+
+    public function quickCount()
+    {
+        $candidates = Candidate::get();
+        $voted = User::where('vote_status', 1)->count();
+
+        foreach ($candidates as $candidate) {
+            $voteResult[] = Vote::where('candidate_id', $candidate->id)->count();
+        }
+
+        $data = [
+            'voteResult' => $voteResult,
+            'voted' => $voted,
+        ];
+
+        return ResponseFormatter::success($data, 'Quick count fetched!');
+    }
+
+    public function voted()
+    {
+        $voted = User::where('vote_status', 1)->count();
+
+        $data = [
+            'voted' => $voted,
+        ];
+
+        return ResponseFormatter::success($data, 'Voted fetched!');
     }
 }
