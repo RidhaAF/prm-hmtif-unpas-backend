@@ -16,12 +16,11 @@ use App\Http\Controllers\API\VoteController;
 |
 */
 
-Route::resource('candidate', CandidateController::class);
-Route::get('quick-count', [VoteController::class, 'quickCount']);
-Route::get('voted', [VoteController::class, 'voted']);
-
 Route::post('register', [UserController::class, 'register']);
 Route::post('login', [UserController::class, 'login']);
+
+Route::resource('candidate', CandidateController::class);
+Route::get('quick-count', [VoteController::class, 'quickCount']);
 
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('voter', [UserController::class, 'fetch']);

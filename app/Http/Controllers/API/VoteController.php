@@ -117,22 +117,15 @@ class VoteController extends Controller
             $voteResult[] = Vote::where('candidate_id', $candidate->id)->count();
         }
 
+        // loop each vote result and calculate percentage
+        foreach ($voteResult as $key => $value) {
+            $voteResult[$key] = $value / $voted * 100;
+        }
+
         $data = [
             'voteResult' => $voteResult,
-            'voted' => $voted,
         ];
 
         return ResponseFormatter::success($data, 'Quick count fetched!');
-    }
-
-    public function voted()
-    {
-        $voted = User::where('vote_status', 1)->count();
-
-        $data = [
-            'voted' => $voted,
-        ];
-
-        return ResponseFormatter::success($data, 'Voted fetched!');
     }
 }
