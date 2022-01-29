@@ -18,9 +18,10 @@ use App\Http\Controllers\DashboardController;
 */
 
 Route::get('/', function () {
-    return view('auth.login');
+    return redirect('login');
 });
 
+// for link storage in production
 Route::get('/linkstorage', function () {
     Artisan::call('storage:link'); // this will do the command line job
 });
