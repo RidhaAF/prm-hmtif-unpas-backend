@@ -17,6 +17,7 @@ body {
 
 .hover-shadow:hover {
     box-shadow: 0px 0px 16px rgba(138, 187, 168, 0.7) !important;
+    transition: box-shadow 0.2s ease-in-out;
 }
 
 /* sidebar-title */
@@ -34,6 +35,10 @@ body {
     color: #198754;
 }
 
+.sidebar-wrapper .menu .sidebar-link:hover {
+    background-color: #e1fff0;
+}
+
 /* sidebar-icon */
 .sidebar-wrapper .menu .sidebar-link i,
 .sidebar-wrapper .menu .sidebar-link svg {
@@ -44,6 +49,15 @@ body {
 .sidebar-wrapper .menu .submenu .submenu-item a {
     color: #198754;
     font-weight: 500;
+}
+
+/* dropdown header */
+.dropdown .dropdown-menu .dropdown-item:hover {
+    background-color: #e1fff0;
+}
+
+.dropdown .dropdown-menu .dropdown-item:focus {
+    background-color: #198754;
 }
 
 .img-candidate-rounded {
