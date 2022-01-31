@@ -17,7 +17,7 @@
 
     {{-- Bootstrap CSS --}}
     <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.css') }}">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
 
     @yield('style')
 
@@ -26,9 +26,7 @@
 
     {{-- My CSS --}}
     <link rel="stylesheet" href="{{ asset('css/auth.css') }}">
-
-    {{-- Favicon --}}
-    <link rel="icon" href="" type="image/x-icon">
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 </head>
 
 <body>

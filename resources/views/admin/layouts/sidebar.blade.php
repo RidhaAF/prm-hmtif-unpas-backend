@@ -4,7 +4,7 @@
             <div class="d-flex justify-content-between">
                 <div class="logo">
                     <a href="{{ route('admin.dashboard') }}">
-                        <h5 class="text-success">PRM HMTIF-UNPAS</h4>
+                        <h5 class="text-success">PRM HMTIF-UNPAS</h5>
                     </a>
                 </div>
                 <div class="toggler">

@@ -1,5 +1,6 @@
 body {
     font-family: "Inter", sans-serif;
+    background-color: #fff !important;
 }
 
 #auth #auth-right {
@@ -8,6 +9,11 @@ body {
     background-size: cover;
 }
 
-#auth #auth-left {
+/* #auth #auth-left {
     padding: 5rem 5rem;
+} */
+
+.form-control:focus {
+    border-color: #8abba8;
+    box-shadow: 0px 0px 8px rgba(138, 187, 168, 0.5);
 }
