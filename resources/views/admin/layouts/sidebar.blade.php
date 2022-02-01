@@ -35,21 +35,19 @@
                     </a>
                 </li>
 
-                {{-- <li class="sidebar-title text-success">Laporan</li>
-                <li class="sidebar-item has-sub">
-                    <a href="{{ route('admin.dashboard') }}" class='sidebar-link'>
-                        <i class="bi bi-file-earmark-arrow-down-fill"></i>
-                        <span>Unduh Laporan</span>
+                <li class="sidebar-title text-success">Unduh Laporan</li>
+                <li class="sidebar-item">
+                    <a href="{{ route('admin.votes.export.excel') }}" class="sidebar-link">
+                        <i class="fas fa-file-excel"></i>
+                        <span>Excel</span>
                     </a>
-                    <ul class="submenu">
-                        <li class="submenu-item">
-                            <a href="">Laporan Kandidat</a>
-                        </li>
-                        <li class="submenu-item">
-                            <a href="">Laporan Pemilih</a>
-                        </li>
-                    </ul>
-                </li> --}}
+                </li>
+                <li class="sidebar-item">
+                    <a href="{{ route('admin.votes.export.pdf') }}" class="sidebar-link">
+                        <i class="fas fa-file-pdf"></i>
+                        <span>PDF</span>
+                    </a>
+                </li>
             </ul>
         </div>
         <button class="sidebar-toggler btn x"><i data-feather="x"></i></button>

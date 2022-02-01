@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\VoteExport;
 use App\Models\User;
 use App\Models\Vote;
 use App\Models\Candidate;
 use App\Http\Controllers\Controller;
 use ArielMejiaDev\LarapexCharts\LarapexChart;
+use Maatwebsite\Excel\Facades\Excel;
 
 class DashboardController extends Controller
 {
@@ -64,6 +66,16 @@ class DashboardController extends Controller
             'not_voted' => User::where('vote_status', 0)->get(),
         ];
 
-        return view('admin.dashboard', $data, compact('chartResult', 'chart2019', 'chart2020', 'chart2021', 'chart2018'));
+        return view('admin.dashboard', $data, compact('chartResult', 'chart2018', 'chart2019', 'chart2020', 'chart2021'));
+    }
+
+    public function exportExcel()
+    {
+        return Excel::download(new VoteExport, 'votes.xlsx');
+    }
+
+    public function exportPdf()
+    {
+        return Excel::download(new VoteExport, 'votes.pdf', \Maatwebsite\Excel\Excel::DOMPDF);
     }
 }

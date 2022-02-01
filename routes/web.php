@@ -31,7 +31,9 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
         return view('dashboard');
     })->name('dashboard');
 
-    Route::get('/admin/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
+    Route::get('admin/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
+    Route::get('admin/votes/export/excel/', [DashboardController::class, 'exportExcel'])->name('admin.votes.export.excel');
+    Route::get('admin/votes/export/pdf/', [DashboardController::class, 'exportPdf'])->name('admin.votes.export.pdf');
 
     Route::resource('admin/candidate', CandidateController::class);
 
