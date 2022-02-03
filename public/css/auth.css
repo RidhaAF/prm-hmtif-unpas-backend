@@ -1,17 +1,8 @@
-body {
-    font-family: "Inter", sans-serif;
-    background-color: #fff !important;
-}
-
 #auth #auth-right {
     background: url(/assets/images/bg/4853433.jpg),
         linear-gradient(45deg, #074628, #44af7d);
     background-size: cover;
 }
-
-/* #auth #auth-left {
-    padding: 5rem 5rem;
-} */
 
 .form-control:focus {
     border-color: #8abba8;
