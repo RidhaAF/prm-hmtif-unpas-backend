@@ -12,6 +12,12 @@
                         height="25" class="object-fit-contain">
                     <h4 class="text-success m-0">PRM HMTIF-UNPAS</h4>
                 </div>
+                @if (session('status'))
+                <div class="alert alert-success alert-dismissible show fade">
+                    {{ session('status') }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                @endif
                 <h1 class="text-success">Masuk</h1>
                 <p class="text-muted mb-5">Silakan masuk untuk melanjutkan.</p>
                 <form action="{{ route('login') }}" method="POST">
