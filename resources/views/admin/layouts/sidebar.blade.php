@@ -3,8 +3,10 @@
         <div class="sidebar-header mt-3">
             <div class="d-flex justify-content-between">
                 <div class="logo">
-                    <a href="{{ route('admin.dashboard') }}">
-                        <h5 class="text-success">PRM HMTIF-UNPAS</h5>
+                    <a href="{{ route('admin.dashboard') }}" class="d-flex">
+                        <img src="{{ asset('assets/images/logo/prm-hmtif-unpas.png') }}" alt="PRM HMTIF-UNPAS"
+                            width="30" height="30" class="object-fit-contain">
+                        <h5 class="text-success mb-0">PRM HMTIF-UNPAS</h5>
                     </a>
                 </div>
                 <div class="toggler">

@@ -7,10 +7,10 @@
     <div class="row min-vh-100">
         <div class="col-12 col-lg-5">
             <div class="px-3 py-5 p-sm-5" id="auth-left">
-                <div class="d-flex justify-content-center gap-2 mb-3">
+                <div class="d-flex justify-content-center gap-2 mb-4">
                     <img src="{{ asset('assets/images/logo/prm-hmtif-unpas.png') }}" alt="PRM HMTIF-UNPAS" width="25"
-                        height="25">
-                    <h4 class="text-success">PRM HMTIF-UNPAS</h4>
+                        height="25" class="object-fit-contain">
+                    <h4 class="text-success m-0">PRM HMTIF-UNPAS</h4>
                 </div>
                 <h1 class="text-success">Masuk</h1>
                 <p class="text-muted mb-5">Silakan masuk untuk melanjutkan.</p>
