@@ -20,13 +20,13 @@ class UserSeeder extends Seeder
         User::create([
             'name' => 'Admin',
             'username' => 'admin',
-            'email' => 'admin@gmail.com',
+            'email' => 'prmhmtifunpas@gmail.com',
             'email_verified_at' => now(),
             'password' => Hash::make('12345678'),
             'roles' => 'Admin',
         ]);
 
-        User::factory(100)->create()->where('vote_status', true)->each(function ($user) {
+        User::factory(rand(75, 120))->create()->where('vote_status', true)->each(function ($user) {
             $user->vote()->save(Vote::factory()->make());
         });
     }

@@ -14,6 +14,6 @@ class CandidateSeeder extends Seeder
      */
     public function run()
     {
-        Candidate::factory()->count(4)->create();
+        Candidate::factory(rand(2, 5))->create();
     }
 }
