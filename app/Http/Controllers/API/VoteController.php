@@ -122,7 +122,9 @@ class VoteController extends Controller
             $voteResult[$key] = $value / $voted * 100;
         }
 
-        $data = $voteResult;
+        $data = [
+            'voteResult' => $voteResult,
+        ];
 
         return ResponseFormatter::success($data, 'Quick count fetched!');
     }
