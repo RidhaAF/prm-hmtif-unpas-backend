@@ -113,19 +113,14 @@ class VoteController extends Controller
         $candidates = Candidate::get();
         $voted = User::where('vote_status', 1)->count();
 
+        // loop through candidates and get the total votes for each candidate and store it in one array at a time
         foreach ($candidates as $candidate) {
-            $voteResult[] = Vote::where('candidate_id', $candidate->id)->count();
+            $candidates_votes[] = [
+                'candidate_id' => $candidate->id,
+                'vote_result' => Vote::where('candidate_id', $candidate->id)->count() / $voted * 100,
+            ];
         }
 
-        // loop each vote result and calculate percentage
-        foreach ($voteResult as $key => $value) {
-            $voteResult[$key] = $value / $voted * 100;
-        }
-
-        $data = [
-            'voteResult' => $voteResult,
-        ];
-
-        return ResponseFormatter::success($data, 'Quick count fetched!');
+        return ResponseFormatter::success($candidates_votes, 'Quick count fetched!');
     }
 }
