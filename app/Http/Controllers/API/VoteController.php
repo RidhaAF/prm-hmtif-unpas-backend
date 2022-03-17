@@ -116,7 +116,6 @@ class VoteController extends Controller
         // loop through candidates and get the total votes for each candidate and store it in one array at a time
         foreach ($candidates as $candidate) {
             $candidates_votes[] = [
-                'candidate_id' => $candidate->id,
                 'vote_result' => Vote::where('candidate_id', $candidate->id)->count() / $voted * 100,
             ];
         }
