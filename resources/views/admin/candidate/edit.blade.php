@@ -15,7 +15,7 @@
                         <div class="col-md-2">
                             @if ($candidate->photo)
                             <div class="ratio ratio-1x1">
-                                <img src="{{ asset('storage/' . $candidate->photo) }}"
+                                <img src="{{ $candidate->photo }}"
                                     class="img-fluid profile-picture-preview img-candidate-fit-rounded"
                                     alt="{{ $candidate->name }}">
                             </div>
@@ -28,8 +28,8 @@
                             @endif
                         </div>
                         <div class="col">
-                            <div class="form-group mb-3">
-                                <label for="photo" class="form-label text-success">Unggah Foto Profil</label>
+                            <div class="form-group mb-3 mt-3 mt-md-0">
+                                <label for="photo" class="form-label text-success">Ubah Foto Profil</label>
                                 <input class="form-control @error('photo') is-invalid @enderror" type="file" id="photo"
                                     name="photo">
                                 @error('photo')

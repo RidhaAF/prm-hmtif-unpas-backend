@@ -29,9 +29,16 @@
             <div class="col-md-2">
                 @if ($candidate->photo)
                 <div class="ratio ratio-1x1">
-                    <img src="{{ asset('storage/' . $candidate->photo) }}" class="img-fluid img-candidate-fit-rounded"
+                    <img src="{{ $candidate->photo }}" class="img-fluid img-candidate-fit-rounded"
                         alt="{{ $candidate->name }}">
                 </div>
+                <form action="{{ route('admin.candidate.delete.photo', $candidate->id) }}" method="POST">
+                    @csrf
+                    <button class="btn btn-link btn-sm link-danger text-decoration-none mt-2" type="submit"
+                        onclick="return confirm('Yakin ingin menghapus foto profil?');">
+                        <i class=" bi bi-trash-fill"></i> Hapus Foto Profil
+                    </button>
+                </form>
                 @else
                 <img src="{{ asset('assets/images/profile-picture-default.png') }}"
                     class="img-fluid img-candidate-rounded" alt="{{ $candidate->name }}">

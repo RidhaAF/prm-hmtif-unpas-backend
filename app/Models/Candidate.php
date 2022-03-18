@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Vote;
+use CloudinaryLabs\CloudinaryLaravel\MediaAlly;
 use Laravel\Jetstream\HasProfilePhoto;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -11,6 +12,7 @@ class Candidate extends Model
 {
     use HasFactory;
     use HasProfilePhoto;
+    use MediaAlly;
 
     /**
      * The attributes that are mass assignable.
@@ -24,6 +26,7 @@ class Candidate extends Model
         'vision',
         'mission',
         'photo',
+        'public_id',
     ];
 
     /**

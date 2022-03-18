@@ -26,7 +26,7 @@
                 <div class="card-content">
                     @if ($candidate->photo)
                     <div class="ratio ratio-1x1">
-                        <img src="{{ asset('storage/' . $candidate->photo) }}" class="img-fluid img-candidate-fit"
+                        <img src="{{ $candidate->photo }}" class="img-fluid img-candidate-fit"
                             alt="{{ $candidate->name }}">
                     </div>
                     @else

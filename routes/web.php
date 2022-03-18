@@ -36,6 +36,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('admin/votes/export/pdf/', [DashboardController::class, 'exportPdf'])->name('admin.votes.export.pdf');
 
     Route::resource('admin/candidate', CandidateController::class);
+    Route::post('admin/candidate/{candidate}', [CandidateController::class, 'deletePhoto'])->name('admin.candidate.delete.photo');
 
     Route::resource('admin/voter', UserController::class);
 });

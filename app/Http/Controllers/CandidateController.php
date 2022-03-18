@@ -6,6 +6,7 @@ use App\Models\Candidate;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use App\Http\Controllers\Controller;
+use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 
 class CandidateController extends Controller
 {
@@ -48,10 +49,18 @@ class CandidateController extends Controller
             'vision' => 'required|string',
             'mission' => 'required|string',
             'photo' => 'image|mimes:jpg,png,jpeg,gif,svg|max:2048',
+            'public_id' => 'nullable|string',
         ]);
 
         if ($request->file('photo')) {
-            $validatedData['photo'] = $request->file('photo')->store('candidate');
+            $validatedData['photo'] = Cloudinary::upload($request->file('photo')->getRealPath(), [
+                'folder' => 'prm-hmtif-unpas/candidates',
+                'crop' => 'scale',
+                'width' => '512',
+                'gravity' => 'center',
+            ])->getSecurePath();
+            $publicId = Cloudinary::getPublicId();
+            $validatedData['public_id'] = $publicId;
         }
 
         Candidate::create($validatedData);
@@ -101,14 +110,22 @@ class CandidateController extends Controller
             'vision' => 'required|string',
             'mission' => 'required|string',
             'photo' => 'image|mimes:jpg,png,jpeg,gif,svg|max:2048',
+            'public_id' => 'nullable|string',
         ]);
 
         if ($request->file('photo')) {
             if ($candidate->photo) {
-                unlink(storage_path('app/public/' . $candidate->photo));
+                Cloudinary::destroy($candidate->public_id);
             }
 
-            $validatedData['photo'] = $request->file('photo')->store('candidate');
+            $validatedData['photo'] = Cloudinary::upload($request->file('photo')->getRealPath(), [
+                'folder' => 'prm-hmtif-unpas/candidates',
+                'crop' => 'scale',
+                'width' => '512',
+                'gravity' => 'center',
+            ])->getSecurePath();
+            $publicId = Cloudinary::getPublicId();
+            $validatedData['public_id'] = $publicId;
         }
 
         $candidate->update($validatedData);
@@ -126,12 +143,27 @@ class CandidateController extends Controller
     public function destroy(Candidate $candidate)
     {
         if ($candidate->photo) {
-            unlink(storage_path('app/public/' . $candidate->photo));
+            Cloudinary::destroy($candidate->public_id);
         }
 
         $candidate->delete();
 
         return redirect()->route('candidate.index')
             ->with('success', 'Kandidat berhasil dihapus.');
+    }
+
+    public function deletePhoto(Candidate $candidate)
+    {
+        if ($candidate->photo) {
+            Cloudinary::destroy($candidate->public_id);
+
+            $candidate->update([
+                'photo' => null,
+                'public_id' => null,
+            ]);
+        }
+
+        return redirect()->route('candidate.index')
+            ->with('success', 'Foto profil kandidat berhasil dihapus.');
     }
 }

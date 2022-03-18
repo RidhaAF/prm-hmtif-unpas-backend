@@ -10,6 +10,7 @@
     "require": {
         "php": "^7.3|^8.0",
         "arielmejiadev/larapex-charts": "^3.0",
+        "cloudinary-labs/cloudinary-laravel": "^1.0",
         "dompdf/dompdf": "^1.1",
         "fruitcake/laravel-cors": "^2.0",
         "fzaninotto/faker": "^1.9.1",

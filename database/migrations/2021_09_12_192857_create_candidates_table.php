@@ -21,6 +21,7 @@ class CreateCandidatesTable extends Migration
             $table->text('vision');
             $table->text('mission');
             $table->string('photo', 2048)->nullable();
+            $table->string('public_id')->nullable();
             $table->timestamps();
         });
     }
