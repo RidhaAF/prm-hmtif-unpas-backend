@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\API;
 
 use Exception;
+use App\Models\User;
+use App\Models\Vote;
 use App\Models\Candidate;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
@@ -18,7 +20,20 @@ class CandidateController extends Controller
      */
     public function index()
     {
-        $data = Candidate::get();
+        $candidates = Candidate::get();
+        $voted = User::where('vote_status', 1)->count();
+
+        // loop through candidates and get the total votes for each candidate and store it in one array at a time
+        foreach ($candidates as $candidate) {
+            $candidate_votes[] = [
+                'vote_result' => Vote::where('candidate_id', $candidate->id)->count() / $voted * 100,
+            ];
+        }
+
+        $data = [
+            'candidates' => $candidates,
+            'candidate_votes' => $candidate_votes,
+        ];
 
         return ResponseFormatter::success($data, 'Candidates fetched!');
     }
