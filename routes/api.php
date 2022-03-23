@@ -26,6 +26,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('voter', [UserController::class, 'fetch']);
     Route::post('voter', [UserController::class, 'updateProfile']);
     Route::post('logout', [UserController::class, 'logout']);
+    Route::post('change-password', [UserController::class, 'changePassword']);
 
     Route::resource('vote', VoteController::class);
 });
