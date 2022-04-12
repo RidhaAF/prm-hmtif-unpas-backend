@@ -127,6 +127,7 @@ class CandidateController extends Controller
                 'mission' => $candidate->mission,
                 'photo' => $candidate->photo,
                 'vote_result' => Vote::where('candidate_id', $candidate->id)->count() / $voted * 100,
+                'vote_count' => Vote::where('candidate_id', $candidate->id)->count(),
             ];
         }
 
