@@ -9,7 +9,6 @@ use App\Helpers\ResponseFormatter;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Password;
 
 class UserController extends Controller
 {
@@ -44,12 +43,12 @@ class UserController extends Controller
                 'access_token' => $tokenResult,
                 'token_type' => 'Bearer',
                 'user' => $user,
-            ], 'Pemilih berhasil ditambahkan.');
+            ], 'Voter created successfully');
         } catch (Exception $error) {
             return ResponseFormatter::error([
                 'message' => 'Something went wrong',
                 'error' => $error,
-            ], 'Authentication Failed', 500);
+            ], 'Authentication failed', 500);
         }
     }
 
@@ -65,13 +64,13 @@ class UserController extends Controller
             if (!Auth::attempt($credentials)) {
                 return ResponseFormatter::error([
                     'message' => 'Unauthorized',
-                ], 'Authentication Failed', 500);
+                ], 'Authentication failed', 500);
             }
 
             $user = User::where('nrp', $request->nrp)->first();
 
             if (!Hash::check($request->password, $user->password, [])) {
-                throw new \Exception('Invalid Credentials');
+                throw new \Exception('Invalid credentials');
             }
 
             $tokenResult = $user->createToken('authToken')->plainTextToken;
@@ -80,18 +79,18 @@ class UserController extends Controller
                 'access_token' => $tokenResult,
                 'token_type' => 'Bearer',
                 'user' => $user,
-            ], 'Authenticated');
+            ], 'Voter authenticated successfully');
         } catch (Exception $error) {
             return ResponseFormatter::error([
                 'message' => 'Something went wrong',
                 'error' => $error,
-            ], 'Authentication Failed', 500);
+            ], 'Authentication failed', 500);
         }
     }
 
     public function fetch(Request $request)
     {
-        return ResponseFormatter::success($request->user(), 'Pemilih berhasil diambil');
+        return ResponseFormatter::success($request->user(), 'Voter fetched successfully');
     }
 
     public function updateProfile(Request $request)
@@ -110,14 +109,7 @@ class UserController extends Controller
 
         $user->update($data);
 
-        return ResponseFormatter::success($user, 'Profil diperbarui');
-    }
-
-    public function logout(Request $request)
-    {
-        $token = $request->user()->currentAccessToken()->delete();
-
-        return ResponseFormatter::success($token, 'Token Revoked');
+        return ResponseFormatter::success($user, 'Voter updated successfully');
     }
 
     public function changePassword(Request $request)
@@ -131,14 +123,21 @@ class UserController extends Controller
 
         if (!Hash::check($request->old_password, $user->password, [])) {
             return ResponseFormatter::error([
-                'message' => 'Password lama salah',
-            ], 'Wrong old password', 500);
+                'message' => 'Old password is incorrect',
+            ], 'Old password is incorrect', 500);
         }
 
         $user->update([
             'password' => Hash::make($request->password),
         ]);
 
-        return ResponseFormatter::success($user, 'Password berhasil diubah');
+        return ResponseFormatter::success($user, 'Password changed successfully');
+    }
+
+    public function logout(Request $request)
+    {
+        $token = $request->user()->currentAccessToken()->delete();
+
+        return ResponseFormatter::success($token, 'Token revoked successfully');
     }
 }

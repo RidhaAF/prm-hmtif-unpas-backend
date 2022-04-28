@@ -19,14 +19,14 @@ use App\Http\Controllers\API\VoteController;
 Route::post('register', [UserController::class, 'register']);
 Route::post('login', [UserController::class, 'login']);
 
-Route::resource('candidate', CandidateController::class);
+Route::get('candidate', [CandidateController::class, 'index']);
 Route::get('quick-count', [CandidateController::class, 'quickCount']);
 
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('voter', [UserController::class, 'fetch']);
     Route::post('voter', [UserController::class, 'updateProfile']);
-    Route::post('logout', [UserController::class, 'logout']);
     Route::post('change-password', [UserController::class, 'changePassword']);
+    Route::post('logout', [UserController::class, 'logout']);
 
-    Route::resource('vote', VoteController::class);
+    Route::post('vote', [VoteController::class, 'store']);
 });
