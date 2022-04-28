@@ -1,12 +1,12 @@
 <div id="sidebar" class="active">
     <div class="sidebar-wrapper active">
-        <div class="sidebar-header mt-3">
+        <div class="mt-3 sidebar-header">
             <div class="d-flex justify-content-between">
                 <div class="logo">
                     <a href="{{ route('admin.dashboard') }}" class="d-flex">
                         <img src="{{ asset('assets/images/logo/prm-hmtif-unpas.png') }}" alt="PRM HMTIF-UNPAS"
                             width="30" height="30" class="object-fit-contain">
-                        <h5 class="text-success mb-0">PRM HMTIF-UNPAS</h5>
+                        <h5 class="mb-0 text-success">PRM HMTIF-UNPAS</h5>
                     </a>
                 </div>
                 <div class="toggler">
@@ -37,7 +37,7 @@
                     </a>
                 </li>
 
-                <li class="sidebar-title text-success">Unduh Laporan</li>
+                {{-- <li class="sidebar-title text-success">Unduh Laporan</li>
                 <li class="sidebar-item">
                     <a href="{{ route('admin.votes.export.excel') }}" class="sidebar-link">
                         <i class="fas fa-file-excel"></i>
@@ -49,7 +49,7 @@
                         <i class="fas fa-file-pdf"></i>
                         <span>PDF</span>
                     </a>
-                </li>
+                </li> --}}
             </ul>
         </div>
         <button class="sidebar-toggler btn x"><i data-feather="x"></i></button>
