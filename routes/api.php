@@ -22,7 +22,7 @@ Route::post('login', [UserController::class, 'login']);
 Route::get('candidate', [CandidateController::class, 'index']);
 Route::get('quick-count', [CandidateController::class, 'quickCount']);
 
-Route::middleware(['auth:sanctum'])->group(function () {
+Route::middleware(['auth:api'])->group(function () {
     Route::get('voter', [UserController::class, 'fetch']);
     Route::post('voter', [UserController::class, 'updateProfile']);
     Route::post('change-password', [UserController::class, 'changePassword']);
