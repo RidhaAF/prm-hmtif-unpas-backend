@@ -35,7 +35,6 @@ class UserController extends Controller
             return ResponseFormatter::success([
                 'access_token' => $token,
                 'token_type' => 'Bearer',
-                'expires_in' => auth()->factory()->getTTL() * 60,
                 'user' => $user,
             ], 'Voter authenticated successfully');
         } catch (Exception $error) {
