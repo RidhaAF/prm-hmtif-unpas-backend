@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\CandidateController;
 use App\Http\Controllers\API\UserController;
 use App\Http\Controllers\API\VoteController;
+use App\Http\Controllers\API\VotingTimeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,6 +19,8 @@ use App\Http\Controllers\API\VoteController;
 
 Route::post('register', [UserController::class, 'register']);
 Route::post('login', [UserController::class, 'login']);
+
+Route::get('voting-time', [VotingTimeController::class, 'index']);
 
 Route::get('candidate', [CandidateController::class, 'index']);
 Route::get('quick-count', [CandidateController::class, 'quickCount']);
