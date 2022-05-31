@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CandidateController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\VotingTimeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,4 +30,6 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::post('admin/candidate/{candidate}', [CandidateController::class, 'deletePhoto'])->name('admin.candidate.delete.photo');
 
     Route::resource('admin/voter', UserController::class);
+
+    Route::resource('admin/voting-time', VotingTimeController::class);
 });

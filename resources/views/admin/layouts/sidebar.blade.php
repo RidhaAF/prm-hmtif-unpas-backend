@@ -36,6 +36,12 @@
                         <span>Pemilih</span>
                     </a>
                 </li>
+                <li class="sidebar-item">
+                    <a href="{{ route('voting-time.index') }}" class='sidebar-link'>
+                        <i class="bi bi-calendar2-event-fill"></i>
+                        <span>Waktu Pemilihan</span>
+                    </a>
+                </li>
 
                 {{-- <li class="sidebar-title text-success">Unduh Laporan</li>
                 <li class="sidebar-item">

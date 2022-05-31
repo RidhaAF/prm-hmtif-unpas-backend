@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
             [
                 CandidateSeeder::class,
                 UserSeeder::class,
+                VotingTimeSeeder::class,
             ]
         );
     }
