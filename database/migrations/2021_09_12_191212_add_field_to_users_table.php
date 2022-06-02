@@ -15,7 +15,6 @@ class AddFieldToUsersTable extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->string('nrp')->after('id')->unique()->nullable();
-            $table->string('username')->after('name')->unique()->nullable();
             $table->string('roles')->after('password')->default('User');
             $table->string('major')->after('roles')->nullable();
             $table->string('class_year')->after('major')->nullable();

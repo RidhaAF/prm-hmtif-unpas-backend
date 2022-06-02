@@ -27,7 +27,6 @@ class UserFactory extends Factory
         return [
             'nrp' => $this->faker->unique()->randomNumber(9),
             'name' => $this->faker->name(),
-            'username' => $this->faker->unique()->userName,
             'email' => $this->faker->unique()->safeEmail(),
             'email_verified_at' => now(),
             'password' => Hash::make('12345678'),

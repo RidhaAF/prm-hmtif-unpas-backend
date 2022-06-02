@@ -19,7 +19,6 @@ class UserSeeder extends Seeder
         //Create Admin
         User::create([
             'name' => 'Admin',
-            'username' => 'admin',
             'email' => 'prmhmtifunpas@gmail.com',
             'email_verified_at' => now(),
             'password' => Hash::make('12345678!@'),
@@ -33,7 +32,6 @@ class UserSeeder extends Seeder
         User::create([
             'nrp' => '183040083',
             'name' => 'Ridha Ahmad Firdaus',
-            'username' => 'ridhaaf',
             'email' => 'ridhaaf@gmail.com',
             'email_verified_at' => now(),
             'password' => Hash::make('12345678'),
@@ -46,7 +44,6 @@ class UserSeeder extends Seeder
         User::create([
             'nrp' => '000000001',
             'name' => 'Tester',
-            'username' => 'tester',
             'email' => 'tester@test.com',
             'email_verified_at' => now(),
             'password' => Hash::make('12345678'),
