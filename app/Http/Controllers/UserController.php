@@ -3,8 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use App\Mail\SendPasswordMail;
 use Illuminate\Validation\Rule;
+use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 
 class UserController extends Controller
 {
@@ -55,11 +60,21 @@ class UserController extends Controller
         $validatedData['major'] = 'Teknik Informatika';
         $validatedData['vote_status'] = false;
 
+        // generate random password
+        $validatedData['password'] = Str::random(8);
+
         if ($request->file('photo')) {
             $validatedData['photo'] = $request->file('photo')->store('user');
         }
 
-        User::create($validatedData);
+        $user = User::create($validatedData);
+
+        // send password to email
+        Mail::to($user->email)->send(new SendPasswordMail($user));
+        // hash validated password
+        $hashedPassword = Hash::make($validatedData['password']);
+        // update password to db
+        $user->update(['password' => $hashedPassword]);
 
         return redirect()->route('voter.index')
             ->with('success', 'Pemilih berhasil ditambahkan.');
