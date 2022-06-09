@@ -19,6 +19,16 @@ class Vote extends Model
     protected $fillable = [
         'user_id',
         'candidate_id',
+        'candidate_id_secret',
+    ];
+
+    /**
+     * The attributes that should be hidden for serialization.
+     *
+     * @var array
+     */
+    protected $hidden = [
+        'candidate_id_secret',
     ];
 
     public function user()
