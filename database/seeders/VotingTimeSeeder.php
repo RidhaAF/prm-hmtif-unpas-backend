@@ -16,7 +16,7 @@ class VotingTimeSeeder extends Seeder
     {
         VotingTime::create([
             'start_time' => '2022-06-30 09:00:00',
-            'end_time' => '2020-06-30 17:00:00',
+            'end_time' => '2022-06-30 17:00:00',
         ]);
     }
 }
