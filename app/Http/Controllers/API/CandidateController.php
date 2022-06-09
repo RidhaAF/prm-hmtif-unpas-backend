@@ -37,8 +37,8 @@ class CandidateController extends Controller
                 'vision' => $candidate->vision,
                 'mission' => $candidate->mission,
                 'photo' => $candidate->photo,
-                'vote_result' => Vote::where('candidate_id', $candidate->id)->count() / $voted * 100,
-                'vote_count' => Vote::where('candidate_id', $candidate->id)->count(),
+                'vote_result' => Vote::where('candidate_id_secret', $candidate->id)->count() / $voted * 100,
+                'vote_count' => Vote::where('candidate_id_secret', $candidate->id)->count(),
             ];
         }
 
