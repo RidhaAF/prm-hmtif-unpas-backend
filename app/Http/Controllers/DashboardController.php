@@ -21,46 +21,36 @@ class DashboardController extends Controller
     {
         $candidates = Candidate::get();
         $candidateNames = $candidates->pluck('name')->toArray();
-        $users = User::join('votes', 'users.id', '=', 'votes.user_id')->get();
+        $users = User::join('votes', 'users.id', '=', 'votes.user_id')->get(['users.class_year', 'votes.candidate_id_secret']);
 
         $chartResult = [];
         foreach ($candidates as $candidate) {
-            $voteResult[] = Vote::where('candidate_id', $candidate->id)->count();
-            $chartResult = (new LarapexChart)->pieChart()
-                ->addData($voteResult)
-                ->setLabels($candidateNames);
+            $voteResult[] = Vote::where('candidate_id_secret', $candidate->id)->count();
+            $chartResult = (new LarapexChart)->pieChart()->addData($voteResult)->setLabels($candidateNames);
         }
 
         $chart2018 = [];
         foreach ($candidates as $candidate) {
-            $voteResult2018[] = $users->where('class_year', 2018)->where('candidate_id', $candidate->id)->count();
-            $chart2018 = (new LarapexChart)->donutChart()
-                ->addData($voteResult2018)
-                ->setLabels($candidateNames);
+            $voteResult2018[] = $users->where('class_year', 2018)->where('candidate_id_secret', $candidate->id)->count();
+            $chart2018 = (new LarapexChart)->donutChart()->addData($voteResult2018)->setLabels($candidateNames);
         }
 
         $chart2019 = [];
         foreach ($candidates as $candidate) {
-            $voteResult2019[] = $users->where('class_year', 2019)->where('candidate_id', $candidate->id)->count();
-            $chart2019 = (new LarapexChart)->donutChart()
-                ->addData($voteResult2019)
-                ->setLabels($candidateNames);
+            $voteResult2019[] = $users->where('class_year', 2019)->where('candidate_id_secret', $candidate->id)->count();
+            $chart2019 = (new LarapexChart)->donutChart()->addData($voteResult2019)->setLabels($candidateNames);
         }
 
         $chart2020 = [];
         foreach ($candidates as $candidate) {
-            $voteResult2020[] = $users->where('class_year', 2020)->where('candidate_id', $candidate->id)->count();
-            $chart2020 = (new LarapexChart)->donutChart()
-                ->addData($voteResult2020)
-                ->setLabels($candidateNames);
+            $voteResult2020[] = $users->where('class_year', 2020)->where('candidate_id_secret', $candidate->id)->count();
+            $chart2020 = (new LarapexChart)->donutChart()->addData($voteResult2020)->setLabels($candidateNames);
         }
 
         $chart2021 = [];
         foreach ($candidates as $candidate) {
-            $voteResult2021[] = $users->where('class_year', 2021)->where('candidate_id', $candidate->id)->count();
-            $chart2021 = (new LarapexChart)->donutChart()
-                ->addData($voteResult2021)
-                ->setLabels($candidateNames);
+            $voteResult2021[] = $users->where('class_year', 2021)->where('candidate_id_secret', $candidate->id)->count();
+            $chart2021 = (new LarapexChart)->donutChart()->addData($voteResult2021)->setLabels($candidateNames);
         }
 
         $data = [
