@@ -4,7 +4,6 @@ namespace App\Http\Controllers\API;
 
 use App\Models\User;
 use App\Models\Vote;
-use App\Models\Candidate;
 use Illuminate\Http\Request;
 use App\Helpers\ResponseFormatter;
 use App\Http\Controllers\Controller;
@@ -22,13 +21,13 @@ class VoteController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'user_id' => 'required|unique:votes',
+            'user_id' => 'unique:votes',
             'candidate_id' => 'required',
-            'candidate_id_secret' => 'required',
         ]);
 
         $validatedData['user_id'] = Auth::user()->id;
-        Hash::make($validatedData['candidate_id']);
+        // hash validated candidate_id
+        $hashedCandidateId = Hash::make($validatedData['candidate_id']);
         $validatedData['candidate_id_secret'] = $validatedData['candidate_id'];
 
         $user = User::where('id', Auth::user()->id)->update([
@@ -36,6 +35,8 @@ class VoteController extends Controller
         ]);
 
         $vote = Vote::create($validatedData, $user);
+        // update hashed candidate_id to db
+        $vote->update(['candidate_id' => $hashedCandidateId]);
 
         return ResponseFormatter::success($vote, 'Vote created successfully');
     }
