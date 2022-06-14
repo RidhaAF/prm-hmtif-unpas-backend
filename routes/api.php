@@ -17,7 +17,6 @@ use App\Http\Controllers\API\VotingTimeController;
 |
 */
 
-Route::post('register', [UserController::class, 'register']);
 Route::post('login', [UserController::class, 'login']);
 
 Route::get('voting-time', [VotingTimeController::class, 'index']);
