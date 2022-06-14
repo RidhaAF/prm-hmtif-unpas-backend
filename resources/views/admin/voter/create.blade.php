@@ -41,7 +41,7 @@
                     </div>
                     <div class="mb-3 form-group">
                         <label for="class_year" class="form-label text-success">Tahun Angkatan</label>
-                        <input type="number" min="2018" max="2021" step="1" name="class_year"
+                        <input type="number" min="2015" max="2021" step="1" name="class_year"
                             placeholder="Masukkan Tahun Angkatan"
                             class="form-control @error('class_year') is-invalid @enderror"
                             value="{{ old('class_year') }}">

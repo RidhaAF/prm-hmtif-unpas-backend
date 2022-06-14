@@ -100,6 +100,54 @@
                 <div class="col-12 col-xl-6 col-md-6">
                     <div class="shadow-sm card">
                         <div class="card-header">
+                            <h4 class="text-success">Angkatan 2015</h4>
+                        </div>
+                        <div class="card-body">
+                            @if ($votes->count() == 0)
+                            <p>Belum ada hasil perhitungan.</p>
+                            @else
+                            {!! $chart2015->container() !!}
+                            <script src="{{ $chart2015->cdn() }}"></script>
+                            {{ $chart2015->script() }}
+                            @endif
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-xl-6 col-md-6">
+                    <div class="shadow-sm card">
+                        <div class="card-header">
+                            <h4 class="text-success">Angkatan 2016</h4>
+                        </div>
+                        <div class="card-body">
+                            @if ($votes->count() == 0)
+                            <p>Belum ada hasil perhitungan.</p>
+                            @else
+                            {!! $chart2016->container() !!}
+                            <script src="{{ $chart2016->cdn() }}"></script>
+                            {{ $chart2016->script() }}
+                            @endif
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-xl-6 col-md-6">
+                    <div class="shadow-sm card">
+                        <div class="card-header">
+                            <h4 class="text-success">Angkatan 2017</h4>
+                        </div>
+                        <div class="card-body">
+                            @if ($votes->count() == 0)
+                            <p>Belum ada hasil perhitungan.</p>
+                            @else
+                            {!! $chart2017->container() !!}
+                            <script src="{{ $chart2017->cdn() }}"></script>
+                            {{ $chart2017->script() }}
+                            @endif
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-xl-6 col-md-6">
+                    <div class="shadow-sm card">
+                        <div class="card-header">
                             <h4 class="text-success">Angkatan 2018</h4>
                         </div>
                         <div class="card-body">
@@ -107,9 +155,7 @@
                             <p>Belum ada hasil perhitungan.</p>
                             @else
                             {!! $chart2018->container() !!}
-
                             <script src="{{ $chart2018->cdn() }}"></script>
-
                             {{ $chart2018->script() }}
                             @endif
                         </div>
@@ -125,9 +171,7 @@
                             <p>Belum ada hasil perhitungan.</p>
                             @else
                             {!! $chart2019->container() !!}
-
                             <script src="{{ $chart2019->cdn() }}"></script>
-
                             {{ $chart2019->script() }}
                             @endif
                         </div>
@@ -143,9 +187,7 @@
                             <p>Belum ada hasil perhitungan.</p>
                             @else
                             {!! $chart2020->container() !!}
-
                             <script src="{{ $chart2020->cdn() }}"></script>
-
                             {{ $chart2020->script() }}
                             @endif
                         </div>
@@ -161,9 +203,7 @@
                             <p>Belum ada hasil perhitungan.</p>
                             @else
                             {!! $chart2021->container() !!}
-
                             <script src="{{ $chart2021->cdn() }}"></script>
-
                             {{ $chart2021->script() }}
                             @endif
                         </div>

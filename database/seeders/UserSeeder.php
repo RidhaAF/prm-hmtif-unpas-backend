@@ -25,7 +25,7 @@ class UserSeeder extends Seeder
             'roles' => 'Admin',
         ]);
 
-        User::factory(rand(75, 120))->create()->where('vote_status', true)->each(function ($user) {
+        User::factory(rand(75, 300))->create()->where('vote_status', true)->each(function ($user) {
             $user->vote()->save(Vote::factory()->make());
         });
 
@@ -50,6 +50,18 @@ class UserSeeder extends Seeder
             'roles' => 'User',
             'major' => 'Teknik Informatika',
             'class_year' => 2020,
+            'vote_status' => false,
+        ]);
+
+        User::create([
+            'nrp' => '000000002',
+            'name' => 'Tester 2',
+            'email' => 'tester2@test.com',
+            'email_verified_at' => now(),
+            'password' => Hash::make('12345678'),
+            'roles' => 'User',
+            'major' => 'Teknik Informatika',
+            'class_year' => 2015,
             'vote_status' => false,
         ]);
     }
