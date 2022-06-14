@@ -27,9 +27,9 @@
     <section class="404">
         <div class="container">
             <div class="d-flex flex-column min-vh-100 justify-content-center align-items-center">
-                <img src="{{ asset('assets/images/404.svg') }}" alt="404 Not Found" class="img-fluid mb-3" width="500">
-                <h1 class="display-1 text-success fw-bold">404 Not Found</h1>
-                <h5 class="text-muted fw-normal mb-3">Oops! Halaman tidak ditemukan..</h4>
+                <img src="{{ asset('assets/images/404.svg') }}" alt="404 Not Found" class="mb-3 img-fluid" width="350">
+                <h1 class="display-3 text-success fw-bold">404 Not Found</h1>
+                <h5 class="mb-3 text-muted fw-normal">Oops! Halaman tidak ditemukan..</h4>
                     <a class="btn btn-outline-success rounded-pill" href="{{ route('admin.dashboard') }}">Kembali ke
                         Dashboard</a>
             </div>
