@@ -4,25 +4,25 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9104a5ea40b3d1f5657401510c21e195",
+    "content-hash": "8ecc0c33854a215923dd8ee6ce1f9f8d",
     "packages": [
         {
             "name": "arielmejiadev/larapex-charts",
-            "version": "3.0.1",
+            "version": "4.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ArielMejiaDev/larapex-charts.git",
-                "reference": "56fc693dc27c7eda0b9925c905a4d34ce5d9669f"
+                "reference": "39a418a2c90b0910e29c5f71e29801d259965873"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ArielMejiaDev/larapex-charts/zipball/56fc693dc27c7eda0b9925c905a4d34ce5d9669f",
-                "reference": "56fc693dc27c7eda0b9925c905a4d34ce5d9669f",
+                "url": "https://api.github.com/repos/ArielMejiaDev/larapex-charts/zipball/39a418a2c90b0910e29c5f71e29801d259965873",
+                "reference": "39a418a2c90b0910e29c5f71e29801d259965873",
                 "shasum": ""
             },
             "require": {
                 "ext-json": "*",
-                "illuminate/support": "^8.0",
+                "illuminate/support": "^8.0|^9.0",
                 "php": "^7.4|^8.0"
             },
             "require-dev": {
@@ -65,9 +65,9 @@
             ],
             "support": {
                 "issues": "https://github.com/ArielMejiaDev/larapex-charts/issues",
-                "source": "https://github.com/ArielMejiaDev/larapex-charts/tree/3.0.1"
+                "source": "https://github.com/ArielMejiaDev/larapex-charts/tree/4.0.0"
             },
-            "time": "2021-07-27T05:55:46+00:00"
+            "time": "2022-03-10T14:16:46+00:00"
         },
         {
             "name": "asm89/stack-cors",
