@@ -17,7 +17,7 @@ class CreateVotesTable extends Migration
             $table->id();
             $table->foreignId('user_id')->unique()->constrained();
             $table->string('candidate_id')->references('id')->on('candidates')->onDelete('cascade');
-            $table->string('candidate_id_secret')->nullable()->invisible();
+            $table->foreignId('candidate_id_secret')->constrained()->nullable()->invisible();
             $table->timestamps();
         });
     }
