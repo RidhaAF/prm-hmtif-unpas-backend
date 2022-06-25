@@ -9,6 +9,7 @@ use App\Helpers\ResponseFormatter;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 
 class UserController extends Controller
 {
@@ -58,10 +59,17 @@ class UserController extends Controller
 
         if ($request->file('photo')) {
             if ($user->photo) {
-                unlink(storage_path('app/public/' . $user->photo));
+                Cloudinary::destroy($user->public_id);
             }
 
-            $data['photo'] = $request->file('photo')->store('user');
+            $data['photo'] = Cloudinary::upload($request->file('photo')->getRealPath(), [
+                'folder' => 'prm-hmtif-unpas/voters',
+                'crop' => 'scale',
+                'width' => '512',
+                'gravity' => 'center',
+            ])->getSecurePath();
+            $publicId = Cloudinary::getPublicId();
+            $data['public_id'] = $publicId;
         }
 
         $user->update($data);

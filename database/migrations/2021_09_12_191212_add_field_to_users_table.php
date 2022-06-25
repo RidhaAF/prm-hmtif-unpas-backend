@@ -20,6 +20,7 @@ class AddFieldToUsersTable extends Migration
             $table->string('class_year')->after('major')->nullable();
             $table->boolean('vote_status')->after('class_year')->nullable();
             $table->string('photo', 2048)->after('vote_status')->nullable();
+            $table->string('public_id')->after('photo')->nullable();
         });
     }
 
