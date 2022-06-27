@@ -26,7 +26,8 @@ Route::get('quick-count', [CandidateController::class, 'quickCount']);
 
 Route::middleware(['auth:api'])->group(function () {
     Route::get('voter', [UserController::class, 'fetch']);
-    Route::post('voter', [UserController::class, 'updateProfile']);
+    Route::post('voter', [UserController::class, 'update']);
+    Route::post('delete-photo', [UserController::class, 'deletePhoto']);
     Route::post('change-password', [UserController::class, 'changePassword']);
     Route::post('logout', [UserController::class, 'logout']);
 

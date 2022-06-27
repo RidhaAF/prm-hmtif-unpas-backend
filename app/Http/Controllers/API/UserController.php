@@ -51,7 +51,7 @@ class UserController extends Controller
         return ResponseFormatter::success(auth()->user(), 'Voter fetched successfully');
     }
 
-    public function updateProfile(Request $request)
+    public function update(Request $request)
     {
         $data = $request->all();
 
@@ -75,6 +75,22 @@ class UserController extends Controller
         $user->update($data);
 
         return ResponseFormatter::success($user, 'Voter updated successfully');
+    }
+
+    public function deletePhoto()
+    {
+        $user = Auth::user();
+
+        if ($user->photo) {
+            Cloudinary::destroy($user->public_id);
+
+            $user->update([
+                'photo' => null,
+                'public_id' => null,
+            ]);
+        }
+
+        return ResponseFormatter::success($user, 'Photo deleted successfully');
     }
 
     public function changePassword(Request $request)
