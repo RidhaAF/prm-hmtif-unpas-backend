@@ -16,8 +16,7 @@ class CreateVotesTable extends Migration
         Schema::create('votes', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->unique()->constrained();
-            $table->string('candidate_id')->references('id')->on('candidates')->onDelete('cascade');
-            $table->foreignId('candidate_id_secret')->constrained()->nullable()->invisible();
+            $table->string('candidate_id');
             $table->timestamps();
         });
     }
