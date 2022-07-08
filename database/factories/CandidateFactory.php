@@ -22,10 +22,10 @@ class CandidateFactory extends Factory
     public function definition()
     {
         return [
-            'nrp' => $this->faker->unique()->randomNumber(9),
+            'nrp' => '1930400' . $this->faker->unique()->numberBetween(10, 99),
             'name' => $this->faker->name(),
-            'vision' => $this->faker->paragraph(),
-            'mission' => $this->faker->paragraph(),
+            'vision' => 'Mewujudkan HMTIF-UNPAS sebagai organisasi yang memiliki keunggulan dan solidaritas tinggi.',
+            'mission' => 'Mewujudkan HMTIF-UNPAS yang berisi pribadi amanah dan tanggung jawab. Mampu membuat dan melaksanakan program HMTIF-UNPAS yang bermanfaat secara luas. Bisa membangun dan mengkoordinasi seluruh elemen HMTIF-UNPAS.',
         ];
     }
 }
