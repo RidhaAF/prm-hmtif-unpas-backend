@@ -22,7 +22,7 @@ Route::post('login', [UserController::class, 'login']);
 Route::get('voting-time', [VotingTimeController::class, 'index']);
 
 Route::get('candidate', [CandidateController::class, 'index']);
-Route::get('quick-count', [CandidateController::class, 'quickCount']);
+Route::get('vote-count', [CandidateController::class, 'voteCount']);
 
 Route::middleware(['auth:api'])->group(function () {
     Route::get('voter', [UserController::class, 'fetch']);

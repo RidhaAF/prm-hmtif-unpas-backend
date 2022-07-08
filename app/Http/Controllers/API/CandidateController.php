@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\API;
 
 use App\Models\User;
-use App\Models\Vote;
 use App\Models\Candidate;
 use App\Helpers\ResponseFormatter;
 use App\Http\Controllers\Controller;
+use App\Models\VoteResult;
 
 class CandidateController extends Controller
 {
@@ -22,7 +22,7 @@ class CandidateController extends Controller
         return ResponseFormatter::success($data, 'Candidates fetched successfully');
     }
 
-    public function quickCount()
+    public function voteCount()
     {
         $candidates = Candidate::get();
         $voted = User::where('vote_status', 1)->count();
@@ -37,11 +37,11 @@ class CandidateController extends Controller
                 'vision' => $candidate->vision,
                 'mission' => $candidate->mission,
                 'photo' => $candidate->photo,
-                'vote_result' => Vote::where('candidate_id_secret', $candidate->id)->count() / $voted * 100,
-                'vote_count' => Vote::where('candidate_id_secret', $candidate->id)->count(),
+                'vote_result' => VoteResult::find($candidate->id)->total_votes / $voted * 100,
+                'vote_count' => VoteResult::find($candidate->id)->total_votes,
             ];
         }
 
-        return ResponseFormatter::success($candidates_votes, 'Quick count fetched successfully');
+        return ResponseFormatter::success($candidates_votes, 'Vote count fetched successfully');
     }
 }
