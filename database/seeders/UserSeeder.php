@@ -16,15 +16,6 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        //Create Admin
-        User::create([
-            'name' => 'Admin',
-            'email' => 'prmhmtifunpas@gmail.com',
-            'email_verified_at' => now(),
-            'password' => Hash::make('12345678!@'),
-            'roles' => 'Admin',
-        ]);
-
         User::factory(rand(75, 300))->create()->where('vote_status', true)->each(function ($user) {
             $user->vote()->save(Vote::factory()->make());
         });
