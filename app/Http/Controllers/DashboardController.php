@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Vote;
 use App\Models\Candidate;
 use App\Http\Controllers\Controller;
+use App\Models\VoteResult;
 use ArielMejiaDev\LarapexCharts\LarapexChart;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -21,54 +22,11 @@ class DashboardController extends Controller
     {
         $candidates = Candidate::get();
         $candidateNames = $candidates->pluck('name')->toArray();
-        $users = User::join('votes', 'users.id', '=', 'votes.user_id')->get(['users.class_year', 'votes.candidate_id_secret']);
 
         $chartResult = [];
         foreach ($candidates as $candidate) {
-            $voteResult[] = Vote::where('candidate_id_secret', $candidate->id)->count();
+            $voteResult[] = VoteResult::find($candidate->id)->total_votes;
             $chartResult = (new LarapexChart)->pieChart()->addData($voteResult)->setLabels($candidateNames)->setFontFamily('Inter');
-        }
-
-        $chart2015 = [];
-        foreach ($candidates as $candidate) {
-            $voteResult2015[] = $users->where('class_year', 2015)->where('candidate_id_secret', $candidate->id)->count();
-            $chart2015 = (new LarapexChart)->donutChart()->addData($voteResult2015)->setLabels($candidateNames)->setFontFamily('Inter');
-        }
-
-        $chart2016 = [];
-        foreach ($candidates as $candidate) {
-            $voteResult2016[] = $users->where('class_year', 2016)->where('candidate_id_secret', $candidate->id)->count();
-            $chart2016 = (new LarapexChart)->donutChart()->addData($voteResult2016)->setLabels($candidateNames)->setFontFamily('Inter');
-        }
-
-        $chart2017 = [];
-        foreach ($candidates as $candidate) {
-            $voteResult2017[] = $users->where('class_year', 2017)->where('candidate_id_secret', $candidate->id)->count();
-            $chart2017 = (new LarapexChart)->donutChart()->addData($voteResult2017)->setLabels($candidateNames)->setFontFamily('Inter');
-        }
-
-        $chart2018 = [];
-        foreach ($candidates as $candidate) {
-            $voteResult2018[] = $users->where('class_year', 2018)->where('candidate_id_secret', $candidate->id)->count();
-            $chart2018 = (new LarapexChart)->donutChart()->addData($voteResult2018)->setLabels($candidateNames)->setFontFamily('Inter');
-        }
-
-        $chart2019 = [];
-        foreach ($candidates as $candidate) {
-            $voteResult2019[] = $users->where('class_year', 2019)->where('candidate_id_secret', $candidate->id)->count();
-            $chart2019 = (new LarapexChart)->donutChart()->addData($voteResult2019)->setLabels($candidateNames)->setFontFamily('Inter');
-        }
-
-        $chart2020 = [];
-        foreach ($candidates as $candidate) {
-            $voteResult2020[] = $users->where('class_year', 2020)->where('candidate_id_secret', $candidate->id)->count();
-            $chart2020 = (new LarapexChart)->donutChart()->addData($voteResult2020)->setLabels($candidateNames)->setFontFamily('Inter');
-        }
-
-        $chart2021 = [];
-        foreach ($candidates as $candidate) {
-            $voteResult2021[] = $users->where('class_year', 2021)->where('candidate_id_secret', $candidate->id)->count();
-            $chart2021 = (new LarapexChart)->donutChart()->addData($voteResult2021)->setLabels($candidateNames)->setFontFamily('Inter');
         }
 
         $data = [
@@ -80,7 +38,7 @@ class DashboardController extends Controller
             'votes' => Vote::get(),
         ];
 
-        return view('admin.dashboard', $data, compact('chartResult', 'chart2015', 'chart2016', 'chart2017', 'chart2018', 'chart2019', 'chart2020', 'chart2021'));
+        return view('admin.dashboard', $data, compact('chartResult'));
     }
 
     public function exportExcel()
