@@ -31,16 +31,6 @@
                         @enderror
                     </div>
                     <div class="mb-3 form-group">
-                        <label for="username" class="form-label text-success">Username</label>
-                        <input type="text" name="username" placeholder="Masukkan Username"
-                            class="form-control @error('username') is-invalid @enderror" value="{{ $voter->username }}">
-                        @error('username')
-                        <div class="invalid-feedback">
-                            {{ $message }}
-                        </div>
-                        @enderror
-                    </div>
-                    <div class="mb-3 form-group">
                         <label for="email" class="form-label text-success">Email</label>
                         <input type="text" name="email" placeholder="Masukkan Email"
                             class="form-control @error('email') is-invalid @enderror" value="{{ $voter->email }}">
