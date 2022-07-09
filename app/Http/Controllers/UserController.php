@@ -10,6 +10,7 @@ use Illuminate\Validation\Rule;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
+use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 
 class UserController extends Controller
 {
@@ -145,7 +146,14 @@ class UserController extends Controller
      */
     public function destroy(User $voter)
     {
+        if ($voter->photo) {
+            Cloudinary::destroy($voter->public_id);
+        }
+
         $voter->delete();
+
+        // delete vote of this voter
+        $voter->vote()->delete();
 
         return redirect()->route('voter.index')
             ->with('success', 'Pemilih berhasil dihapus.');
