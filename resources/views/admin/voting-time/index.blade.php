@@ -27,13 +27,25 @@
         <div class="col-12 col-sm-6 col-md-5">
             <div class="mb-3">
                 <label for="start-time" class="form-label fw-semibold text-success">Waktu Mulai</label>
-                <input type="datetime-local" class="form-control" id="start-time" name="start_time">
+                <input type="datetime-local" class="form-control @error('start_time') is-invalid @enderror"
+                    id="start-time" name="start_time" value="{{ old('start_time') }}">
+                @error('start_time')
+                <div class="invalid-feedback">
+                    {{ $message }}
+                </div>
+                @enderror
             </div>
         </div>
         <div class="col-12 col-sm-6 col-md-5">
             <div class="mb-3">
                 <label for="end-time" class="form-label fw-semibold text-success">Waktu Selesai</label>
-                <input type="datetime-local" class="form-control" id="end-time" name="end_time">
+                <input type="datetime-local" class="form-control @error('end_time') is-invalid @enderror" id="end-time"
+                    name="end_time" value="{{ old('end_time') }}">
+                @error('end_time')
+                <div class="invalid-feedback">
+                    {{ $message }}
+                </div>
+                @enderror
             </div>
         </div>
         <div class="col-12 col-sm-6 col-md-2 d-flex align-items-end">
