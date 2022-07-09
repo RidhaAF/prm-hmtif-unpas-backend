@@ -23,7 +23,7 @@ class UserSeeder extends Seeder
         User::create([
             'nrp' => '183040083',
             'name' => 'Ridha Ahmad Firdaus',
-            'email' => 'ridhaaf@gmail.com',
+            'email' => 'firdaus.183040083@mail.unpas.ac.id',
             'email_verified_at' => now(),
             'password' => Hash::make('12345678'),
             'roles' => 'User',
