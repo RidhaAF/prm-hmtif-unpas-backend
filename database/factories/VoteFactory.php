@@ -19,18 +19,10 @@ class VoteFactory extends Factory
     {
         $candidateId = Candidate::all()->random()->id;
 
-        // if vote factory executed, then insert/update vote_results table
-        $voteResult = VoteResult::where('candidate_id', $candidateId)->first();
-        if ($voteResult) {
-            $voteResult->total_votes += 1;
-            $voteResult->save();
-        } else {
-            $voteResult = new VoteResult;
-            $voteResult->candidate_id = $candidateId;
-            $voteResult->candidate_name = Candidate::find($candidateId)->name;
-            $voteResult->total_votes = 1;
-            $voteResult->save();
-        }
+        // if vote factory executed, then update vote_results table
+        $voteResult = VoteResult::where('candidate_nrp', Candidate::find($candidateId)->nrp)->first();
+        $voteResult->total_votes += 1;
+        $voteResult->save();
 
         return [
             'user_id' => User::all()->unique()->random()->id,

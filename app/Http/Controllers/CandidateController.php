@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Candidate;
+use App\Models\VoteResult;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use App\Http\Controllers\Controller;
@@ -64,6 +65,12 @@ class CandidateController extends Controller
         }
 
         Candidate::create($validatedData);
+
+        // insert vote_results table when candidate is created
+        $voteResult = new VoteResult();
+        $voteResult->candidate_nrp = $validatedData['nrp'];
+        $voteResult->candidate_name = $validatedData['name'];
+        $voteResult->save();
 
         return redirect()->route('candidate.index')
             ->with('success', 'Kandidat berhasil ditambahkan.');
@@ -127,6 +134,12 @@ class CandidateController extends Controller
             $publicId = Cloudinary::getPublicId();
             $validatedData['public_id'] = $publicId;
         }
+
+        // update vote_results table when candidate is updated
+        $voteResult = VoteResult::where('candidate_nrp', $candidate->nrp)->first();
+        $voteResult->candidate_nrp = $validatedData['nrp'];
+        $voteResult->candidate_name = $validatedData['name'];
+        $voteResult->save();
 
         $candidate->update($validatedData);
 

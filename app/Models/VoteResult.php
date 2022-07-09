@@ -11,6 +11,7 @@ class VoteResult extends Model
 
     protected $fillable = [
         'candidate_id',
+        'candidate_nrp',
         'candidate_name',
         'total_votes',
     ];
