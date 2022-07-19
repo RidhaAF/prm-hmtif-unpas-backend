@@ -2,14 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Exports\VoteExport;
+use Carbon\Carbon;
 use App\Models\User;
 use App\Models\Vote;
 use App\Models\Candidate;
-use App\Http\Controllers\Controller;
 use App\Models\VoteResult;
-use ArielMejiaDev\LarapexCharts\LarapexChart;
+use App\Exports\VoteExport;
+use App\Http\Controllers\Controller;
+use App\Models\VotingTime;
 use Maatwebsite\Excel\Facades\Excel;
+use ArielMejiaDev\LarapexCharts\LarapexChart;
 
 class DashboardController extends Controller
 {
@@ -20,13 +22,18 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        $candidates = Candidate::get();
+        // get current year - 3 years
+        $class_year = Carbon::now()->year - 3;
+        $candidates = Candidate::where('class_year', $class_year)->get();
         $candidateNames = $candidates->pluck('name')->toArray();
+
+        // get total_votes for each candidate where class_year = $class_year
+        $voteResults = VoteResult::where('candidate_class_year', $class_year)->get();
+        $totalVotes = $voteResults->pluck('total_votes')->toArray();
 
         $chartResult = [];
         foreach ($candidates as $candidate) {
-            $voteResult[] = VoteResult::find($candidate->id)->total_votes;
-            $chartResult = (new LarapexChart)->pieChart()->addData($voteResult)->setLabels($candidateNames)->setFontFamily('Inter');
+            $chartResult = (new LarapexChart)->pieChart()->addData($totalVotes)->setLabels($candidateNames)->setFontFamily('Inter');
         }
 
         $data = [
@@ -39,6 +46,32 @@ class DashboardController extends Controller
         ];
 
         return view('admin.dashboard', $data, compact('chartResult'));
+    }
+
+    public function winner()
+    {
+        // get current year - 3 years
+        $class_year = Carbon::now()->year - 3;
+
+        // find end_time from votingTime table
+        $endTime = VotingTime::first()->value('end_time');
+
+        // if votingTime end, show winner candidate
+        if (Carbon::now()->format('Y-m-d H:i:s') > Carbon::parse($endTime)->format('Y-m-d H:i:s')) {
+            // show the most votes candidate
+            $winner = VoteResult::where('candidate_class_year', $class_year)->orderBy('total_votes', 'desc')->first();
+            // find candidate by nrp according winner
+            $candidate = Candidate::where('nrp', $winner->candidate_nrp)->first();
+        }
+
+        return view('admin.winner.index', [
+            'title' => 'Pemenang',
+            // if $winner undefined, show message
+            'winner' => isset($winner) ? $winner : 'Belum ada pemenang',
+            // if $candidate undefined, show message
+            'candidate' => isset($candidate) ? $candidate : 'Belum ada pemenang',
+            'endTime' => $endTime,
+        ]);
     }
 
     public function exportExcel()

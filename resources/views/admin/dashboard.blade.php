@@ -83,7 +83,8 @@
                             <h4 class="text-success">Grafik Hasil Perhitungan Suara</h4>
                         </div>
                         <div class="card-body">
-                            @if ($votes->count() == 0)
+                            {{-- if $votes is not isset then show alert --}}
+                            @if(!isset($votes))
                             <p>Belum ada hasil perhitungan.</p>
                             @else
                             {!! $chartResult->container() !!}

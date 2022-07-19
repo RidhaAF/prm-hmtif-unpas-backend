@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\Candidate;
 use App\Models\VoteResult;
 use Illuminate\Http\Request;
@@ -18,9 +19,12 @@ class CandidateController extends Controller
      */
     public function index()
     {
+        // get current year - 3 years
+        $class_year = Carbon::now()->year - 3;
+
         return view('admin.candidate.index', [
             'title' => 'Kandidat',
-            'candidates' => Candidate::get()
+            'candidates' => Candidate::where('class_year', $class_year)->get(),
         ]);
     }
 
@@ -45,8 +49,9 @@ class CandidateController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'nrp' => 'required|string|min:9|max:9|unique:candidates',
+            'nrp' => 'required|string|digits:9|unique:candidates',
             'name' => 'required|string|max:255',
+            'class_year' => 'required|integer|digits:4',
             'vision' => 'required|string',
             'mission' => 'required|string',
             'photo' => 'image|mimes:jpg,png,jpeg,gif,svg|max:2048',
@@ -68,8 +73,9 @@ class CandidateController extends Controller
 
         // insert vote_results table when candidate is created
         $voteResult = new VoteResult();
+        $voteResult->candidate_id = Candidate::where('nrp', $validatedData['nrp'])->first()->id;
         $voteResult->candidate_nrp = $validatedData['nrp'];
-        $voteResult->candidate_name = $validatedData['name'];
+        $voteResult->candidate_class_year = $validatedData['class_year'];
         $voteResult->save();
 
         return redirect()->route('candidate.index')
@@ -112,8 +118,9 @@ class CandidateController extends Controller
     public function update(Request $request, Candidate $candidate)
     {
         $validatedData = $request->validate([
-            'nrp' => ['required', 'string', 'min:9', 'max:9', Rule::unique('candidates')->ignore($candidate->id)],
+            'nrp' => ['required', 'string', 'digits:9', Rule::unique('candidates')->ignore($candidate->id)],
             'name' => 'required|string|max:255',
+            'class_year' => 'required|integer|digits:4',
             'vision' => 'required|string',
             'mission' => 'required|string',
             'photo' => 'image|mimes:jpg,png,jpeg,gif,svg|max:2048',
@@ -138,7 +145,7 @@ class CandidateController extends Controller
         // update vote_results table when candidate is updated
         $voteResult = VoteResult::where('candidate_nrp', $candidate->nrp)->first();
         $voteResult->candidate_nrp = $validatedData['nrp'];
-        $voteResult->candidate_name = $validatedData['name'];
+        $voteResult->candidate_class_year = $validatedData['class_year'];
         $voteResult->save();
 
         $candidate->update($validatedData);

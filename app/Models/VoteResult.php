@@ -10,9 +10,13 @@ class VoteResult extends Model
     use HasFactory;
 
     protected $fillable = [
-        'candidate_id',
         'candidate_nrp',
-        'candidate_name',
+        'candidate_class_year',
         'total_votes',
     ];
+
+    public function candidate()
+    {
+        return $this->belongsTo(Candidate::class, 'candidate_nrp', 'nrp');
+    }
 }

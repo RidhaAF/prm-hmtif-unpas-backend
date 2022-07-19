@@ -3,14 +3,14 @@
 
 @section('content')
 
-<div class="card shadow-sm">
+<div class="shadow-sm card">
     <div class="card-body">
         <div class="row">
             <div class="col">
                 <a class="btn btn-outline-success" href="{{ route('candidate.index') }}" role="button">
                     <i class="bi bi-arrow-left"></i> Kembali</a>
             </div>
-            <div class="col-auto d-flex text-right">
+            <div class="col-auto text-right d-flex">
                 <form action="{{ route('candidate.destroy', $candidate->id) }}" method="POST">
                     @csrf
                     @method('DELETE')
@@ -34,7 +34,7 @@
                 </div>
                 <form action="{{ route('admin.candidate.delete.photo', $candidate->id) }}" method="POST">
                     @csrf
-                    <button class="btn btn-link btn-sm link-danger text-decoration-none mt-2" type="submit"
+                    <button class="mt-2 btn btn-link btn-sm link-danger text-decoration-none" type="submit"
                         onclick="return confirm('Yakin ingin menghapus foto profil?');">
                         <i class=" bi bi-trash-fill"></i> Hapus Foto Profil
                     </button>
@@ -49,6 +49,8 @@
                 <p>{{ $candidate->nrp }}</p>
                 <h6 class="text-success">Nama</h6>
                 <p>{{ $candidate->name }}</p>
+                <h6 class="text-success">Tahun Angkatan</h6>
+                <p>{{ $candidate->class_year }}</p>
                 <h6 class="text-success">Visi</h6>
                 <p>{{ $candidate->vision }}</p>
                 <h6 class="text-success">Misi</h6>

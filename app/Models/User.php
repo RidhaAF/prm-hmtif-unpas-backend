@@ -10,6 +10,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable implements JWTSubject
@@ -18,6 +19,7 @@ class User extends Authenticatable implements JWTSubject
     use HasFactory;
     use HasProfilePhoto;
     use Notifiable;
+    use SoftDeletes;
     use TwoFactorAuthenticatable;
 
     /**

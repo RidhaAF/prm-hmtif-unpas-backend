@@ -7,12 +7,14 @@ use CloudinaryLabs\CloudinaryLaravel\MediaAlly;
 use Laravel\Jetstream\HasProfilePhoto;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Candidate extends Model
 {
     use HasFactory;
     use HasProfilePhoto;
     use MediaAlly;
+    use SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -23,6 +25,7 @@ class Candidate extends Model
         'nrp',
         'name',
         'major',
+        'class_year',
         'vision',
         'mission',
         'photo',
@@ -41,5 +44,10 @@ class Candidate extends Model
     public function vote()
     {
         return $this->hasMany(Vote::class, 'candidate_id', 'id');
+    }
+
+    public function voteResult()
+    {
+        return $this->hasOne(VoteResult::class, 'candidate_nrp', 'nrp');
     }
 }

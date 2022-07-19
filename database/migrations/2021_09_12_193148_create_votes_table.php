@@ -18,6 +18,7 @@ class CreateVotesTable extends Migration
             $table->foreignId('user_id')->unique();
             $table->string('candidate_id');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

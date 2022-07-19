@@ -16,7 +16,7 @@ class CreateVoteResultsTable extends Migration
         Schema::create('vote_results', function (Blueprint $table) {
             $table->id();
             $table->string('candidate_nrp')->unique();
-            $table->string('candidate_name');
+            $table->year('candidate_class_year');
             $table->integer('total_votes')->default(0);
             $table->timestamps();
         });

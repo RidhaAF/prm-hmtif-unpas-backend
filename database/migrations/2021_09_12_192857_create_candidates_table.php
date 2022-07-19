@@ -18,11 +18,13 @@ class CreateCandidatesTable extends Migration
             $table->string('nrp')->unique();
             $table->string('name');
             $table->string('major')->default('Teknik Informatika');
+            $table->year('class_year');
             $table->text('vision');
             $table->text('mission');
             $table->string('photo', 2048)->nullable();
             $table->string('public_id')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
