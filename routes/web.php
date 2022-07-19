@@ -32,4 +32,5 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::resource('admin/voter', UserController::class);
 
     Route::resource('admin/voting-time', VotingTimeController::class);
+    Route::get('admin/winner', [DashboardController::class, 'winner'])->name('admin.winner');
 });

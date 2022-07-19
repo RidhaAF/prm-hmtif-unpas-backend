@@ -42,6 +42,12 @@
                         <span>Waktu Pemilihan</span>
                     </a>
                 </li>
+                <li class="sidebar-item">
+                    <a href="{{ route('admin.winner') }}" class='sidebar-link'>
+                        <i class="bi bi-trophy-fill"></i>
+                        <span>Pemenang</span>
+                    </a>
+                </li>
 
                 {{-- <li class="sidebar-title text-success">Unduh Laporan</li>
                 <li class="sidebar-item">
